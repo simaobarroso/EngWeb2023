@@ -44,5 +44,10 @@ body {
 }
 
 .navbar-links li:hover{
-    background-color: aqua;
+   font-size: larger;
+   color: blue;
+}
+
+.corpo{
+    margin-left: 0.5rem;
 }
