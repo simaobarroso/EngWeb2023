@@ -1,61 +1,78 @@
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8"></head><body>import json
+import json
 
-def ordCidade(cidade):
-    return cidade['nome']
+
+def ordCidade(c):
+    return c['nome']
+
 
 f = open("mapa.json")
 mapa = json.load(f)
-cidades = mapa['cidades']
+cidades = mapa["cidades"]
+ligações = mapa["ligações"]
 cidades.sort(key=ordCidade)
 
 pagHTML = """
-
-
-    
+<!DOCTYPE html>
+<html>
+    <head>
         <title>Mapa Virtual</title>
-        <meta charset="utf-8">
-    
-    
-        <h1>Mapa Virtual</h1>
+        <meta charset = "utf-8"/>
+    </head>
+    <body>
+        <center>
+            <h1>Mapa Virtual</h1>
+        </center>
         <table>
-            <tbody><tr>
-                <!-- Coluna do índice -->
-                <td width="30%" valign="top">
-                    <a name="indice">
-                    <h3>Índice</h3>
-                    </a><ol><a name="indice">
-"""
-
-for c in cidades:
-    pagHTML += f"</a><li><a name="indice"></a><a href="#{c[" id']}'="">{c['nome']}</a></li>"
-
-pagHTML += """
-</ol>
-                </td>
-                <!-- Coluna do conteúdo -->
-                <td width="70%">
+            <tr>
+                <!--indice-->
+                <td valign="top">
+                <a name="indice"<\a>
+                                    <h3>Índice</h3>
+                    <ul>
 """
 
 for c in cidades:
     pagHTML += f"""
-                    <a name="{c['id']}">
+    <li>
+        <a href="#{c['id']}">{c['nome']}</a>
+    </li>
+    """
+pagHTML += """
+            </ul>
+                </td>
+                <!--conteudo-->
+                <td>
+"""
+for c in cidades:
+    pagHTML += f"""
+                      <a name="{c['id']}"></a>
                     <h3>{c['nome']}</h3>
-                    <p><b>Distrito:</b> {c['distrito']}</p>
-                    <p><b>População:</b> {c['população']}</p>
-                    <p><b>Descrição:</b> {c['descrição']}</p>
-                    <adress>[</adress></a><a href="#indice">Voltar ao índice</a>]
+                    <p><b>População</b> {c['população']}</p>
+                    <p><b>Descrição:</b>{c['descrição']}</p>
+                    <p><b>Distrito:</b>{c['distrito']}</p>
+                    <h3> Ligações:</h3>
+    """
+    for l in ligações:
+        if l['origem'] == c['id']:
+            for s in cidades:
+                if s['id']==l['destino']:
+                    pagHTML += f""" <ul>
+                        <li>{s['nome']} - {l['distância']} Km</li>
+                    </ul>
+        
+    """
+
+    pagHTML += f"""
+     <adress>[<a href="#indice"> voltar ao Indice] </a>                
                     <center>
                         <hr width="80%">
                     </center>
     """
 
-pagHTML += """
-                </td>
+pagHTML += """ </td>
             </tr>
-        </tbody></table>
-    
+        </table>
+    </body>
+</html>"""
 
-"""
-
-print(pagHTML)</body></html>
+print(pagHTML)
