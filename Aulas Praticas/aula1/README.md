@@ -2,7 +2,7 @@
 <p>
 Colocar as ligacoes entre as cidades usando o json.
 Pegamos nos ficheiros fornecidos no site da disciplica e completar de modo a ter as ligacoes.
-O template serve apenas como base para geramos a restante pagina.ss
+O template serve apenas como base para geramos a restante paginas.
 </p>
 <p> Para gerar o ficheiro basta :
 <b>python geraHTML.py > mapa.html</b>
