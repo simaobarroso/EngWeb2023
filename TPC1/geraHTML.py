@@ -39,7 +39,6 @@ pagHTML = """
             <li><a href="#intro">Intro</a></li>
             <li><a href="#hist">Historia do Iogurte</a></li>
             <li><a href="#prop">Propriedades e Caracteristicas dos Iogurtes</a></li>
-            <li><a href="#tipos">Tipos de Iogurtes</a></li>
             <li><a href="#iogPort">Iogurtes Populares em Portugal</a></li>
             <li><a href="#Notas">Notas</a></li>
             <li><a href="#Spanish Inquisition">Spanish Inquisition</a></li>
@@ -105,8 +104,6 @@ Essa ideia de que o iogurte prolonga a vida alimentou um modismo do consumo de i
             <li>Auxilia em dietas para a perda de gordura corporal</li>
         </ol> 
     
-    <a name="tipos"></a>
-    <h3>Tipos de Iogurtes</h3>   
     
     
     <a name="iogPort"></a>
