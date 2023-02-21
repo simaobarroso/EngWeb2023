@@ -13,11 +13,23 @@ listaRandom = ['''<iframe width="560" height="315" src="https://www.youtube.com/
 
 #print(listaRandom[randint(0,5)]) 
 
-pagHTML = f"""
-    <html><head>
+pagHTML = """
+<html>
+    <head>
+        <!--configs-->
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>Iogurte</title>
+        <meta charset="utf-8">
+        <!--links-->
+        <link rel="stylesheet" href="style.css"> <!--TRATAR DEPOIS DO CSS-->
+        <style>
+            table, th, td {
+              border: 1px solid black;
+            }
+        </style>
 
-
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Iogurte</title><meta charset="utf-8"><link rel="stylesheet" href="style.css"> </head><body bgcolor="#ADD8E6">
+    </head>
+<body bgcolor="#ADD8E6">
 
     <nav class="navbar">
     <!--<h3>Indice</h3>-->
