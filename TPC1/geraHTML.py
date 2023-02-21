@@ -141,10 +141,10 @@ Essa ideia de que o iogurte prolonga a vida alimentou um modismo do consumo de i
     <a name="Notas"></a>
     <h3>Notas</h3>
     <ul>
-        <li>Todas as informacoes foram retiradas do <a href="https://pt.wikipedia.org/wiki/Iogurte"> wikipedia</a></li>
+        <li>Todas as informacoes foram retiradas do <a href="https://pt.wikipedia.org/wiki/Iogurte"> wikipedia</a>, <a href="https://laticiniosholandes.com.br/conheca-a-historia-do-iogurte/">laticinios holandes</a> e 
+        <a href="https://aditivosingredientes.com/artigos/laticinios/o-saudavel-mercado-dos-iogurtes">aditivos ingredientes</a></li>
         <li>Erros gramaticais devido ao uso do teclado em ingles</li>
-        <li>https://laticiniosholandes.com.br/conheca-a-historia-do-iogurte/</li>
-        <li>https://aditivosingredientes.com/artigos/laticinios/o-saudavel-mercado-dos-iogurtes</li>
+
     </ul>
 """
 pagHTML += f"""<a name="Spanish Inquisition"></a>
@@ -157,6 +157,7 @@ pagHTML+="""
     <center>
         <p>Pagina realizada para a UC de Engenharia Web (3 ano, 2 semestre) - Universidade do Minho</p>
         <p>Simao Barroso (a96834)</p>
+        <img src="img/EEUM_logo_EN.png" width="100">
     </center>
     </body></html>    
     """
