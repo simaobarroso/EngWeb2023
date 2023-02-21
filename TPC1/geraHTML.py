@@ -1,20 +1,3 @@
-<!DOCTYPE html> 
-<html>
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>Iogurte</title>
-        <meta charset="utf-8">
-        <!--links-->
-        <link rel="stylesheet" href="style.css"> <!--TRATAR DEPOIS DO CSS-->
-        <style>
-            table, th, td {
-              border: 1px solid black;
-            }
-        </style>
-
-    </head>
-
-<body bgcolor="#ADD8E6">
 from random import randint
 
 
@@ -22,7 +5,6 @@ from random import randint
 # geracao de ficheiros HTML a partir de python
 
 listaRandom = ['''<iframe width="560" height="315" src="https://www.youtube.com/embed/yKQ_sQKBASM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>''' ,
-               '''<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>''',
                '''<iframe width="560" height="315" src="https://www.youtube.com/embed/T8XeDvKqI4E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>''',
                '''<iframe width="560" height="315" src="https://www.youtube.com/embed/iSmkqocn0oQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>''',
                '''<iframe width="560" height="315" src="https://www.youtube.com/embed/f_6YwTLXqXw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>''',
@@ -31,7 +13,11 @@ listaRandom = ['''<iframe width="560" height="315" src="https://www.youtube.com/
 
 #print(listaRandom[randint(0,5)]) 
 
-pagHTML = """
+pagHTML = f"""
+    <html><head>
+
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Iogurte</title><meta charset="utf-8"><link rel="stylesheet" href="style.css"> </head><body bgcolor="#ADD8E6">
 
     <nav class="navbar">
     <!--<h3>Indice</h3>-->
@@ -151,17 +137,21 @@ Essa ideia de que o iogurte prolonga a vida alimentou um modismo do consumo de i
         <li>https://laticiniosholandes.com.br/conheca-a-historia-do-iogurte/</li>
         <li>https://aditivosingredientes.com/artigos/laticinios/o-saudavel-mercado-dos-iogurtes</li>
     </ul>
-
-        
-    <a name="Spanish Inquisition"></a>
-    <center {listaRandom[randint(0,5)]}  </center>
+"""
+pagHTML += f"""<a name="Spanish Inquisition"></a>
+    <center> {listaRandom[randint(0,4)]}  </center>
     </div>
-    
+    """
+
+pagHTML+="""    
     <br>
     <center>
         <p>Pagina realizada para a UC de Engenharia Web (3 ano, 2 semestre) - Universidade do Minho</p>
         <p>Simao Barroso (a96834)</p>
     </center>
+    </body></html>    
     """
 
-print(pagHTML)</body></html>    
+#python geraHTML.py > final.html
+
+print(pagHTML)
