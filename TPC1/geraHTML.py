@@ -21,7 +21,7 @@ pagHTML = """
         <title>Iogurte</title>
         <meta charset="utf-8">
         <!--links-->
-        <link rel="stylesheet" href="style.css"> <!--TRATAR DEPOIS DO CSS-->
+        <link rel="stylesheet" href="style.css"> 
         <style>
             table, th, td {
               border: 1px solid black;
@@ -51,7 +51,7 @@ pagHTML = """
     <div class="corpo">
 
     <a name="intro"></a>
-    <h3>Introducao</h3>
+    <h3>Introducão</h3>
     <p>O iogurte (do turco yoğurt,"denso" ou "tornar denso") é uma forma de leite em que o açúcar (a lactose) foi transformado em ácido láctico, por fermentação bacteriana. 
         Pode ser sólido ou um liquido.
         O iogurte é um alimento que tem origem nos Balcãs e, tal como outros produtos derivados do leite fermentado, como o leben árabe, o koumis russo, o jugurt turco ou o kefir caucasiano, remontam há milhares de anos. 
@@ -82,7 +82,7 @@ Essa ideia de que o iogurte prolonga a vida alimentou um modismo do consumo de i
         <h4>Ingredientes de um Iogurte</h4>
         <dl>
             <dt>Leite</dt> 
-                <dd>Seja de origem animal ou de outra origem, o leite e fundamental ao Iogurte por causa da fermentação</dd>
+                <dd>Seja de origem animal ou de outra origem, o leite é fundamental ao Iogurte por causa da fermentação</dd>
             <dt>Açúcar</dt>
                 <dd>Porque tudo na vida precisa de um doce</dd>
             <dt>Leite em pó desnatado</dt>
@@ -123,7 +123,7 @@ Essa ideia de que o iogurte prolonga a vida alimentou um modismo do consumo de i
     <tr>
         <td align="center"><img src="https://www.auchan.pt/dw/image/v2/BFRC_PRD/on/demandware.static/-/Sites-auchan-pt-master-catalog/default/dw2b26dc06/images/hi-res/003521453.jpg" width="200"></td>
         <td align="center"><a href="https://www.auchan.pt/pt/alimentacao/produtos-lacteos/iogurtes/cremosos-gregos/iogurte-grego-oikos-natural-900gr/3521453.html">Iogurte Grego</a></td>
-        <td align="center">Infelizmente nao percebo como e que e tao popular.</td>
+        <td align="center">Infelizmente não percebo como é que é tão popular.</td>
     </tr>
     <tr>
         <td align="center"><img src="https://saboreiaavida.nestle.pt/sites/default/files/styles/product_630x630/public/2021-12/Nesquik-Petit_6x60_ar.png?itok=w1vCLKyQ" width="200"></td>
@@ -134,15 +134,15 @@ Essa ideia de que o iogurte prolonga a vida alimentou um modismo do consumo de i
         <td align="center"><img src="https://www.continente.pt/dw/image/v2/BDVS_PRD/on/demandware.static/-/Sites-col-master-catalog/default/dw9638a767/images/col/607/6078857-frente.jpg?sw=2000&sh=2000" width="200"></td>
         <td align="center"><a href="https://www.continente.pt/produto/iogurte-liquido-morango-yoggi-6078857.html?cgid=laticinios-iogurtes-liquidos">Iogurte Líquido</a></td>
         <td align="center">Semelhantes aos outros iogurtes, mas em formato líquido. Popularmente usado como bebida complementar a uma 
-            refeição. Ajuda no balanco do dia a dia, e traz a tao amada calma.</td>
+            refeição. Ajuda no balanco do dia a dia, e traz a tão amada calma.</td>
     </tr>
 </table>
 
     <a name="Notas"></a>
     <h3>Notas</h3>
     <ul>
-        <li>Todas as informacoes foram retiradas do <a href="https://pt.wikipedia.org/wiki/Iogurte"> wikipedia</a>, <a href="https://laticiniosholandes.com.br/conheca-a-historia-do-iogurte/">laticinios holandes</a> e 
-        <a href="https://aditivosingredientes.com/artigos/laticinios/o-saudavel-mercado-dos-iogurtes">aditivos ingredientes</a></li>
+        <li>Todas as informacães foram retiradas do <a href="https://pt.wikipedia.org/wiki/Iogurte"> Wikipedia</a>, <a href="https://laticiniosholandes.com.br/conheca-a-historia-do-iogurte/">Laticinios Holandes</a> e 
+        <a href="https://aditivosingredientes.com/artigos/laticinios/o-saudavel-mercado-dos-iogurtes">Aditivos Ingredientes</a></li>
         <li>Erros gramaticais devido ao uso do teclado em ingles</li>
 
     </ul>
@@ -156,7 +156,7 @@ pagHTML+="""
     <br>
     <center>
         <p>Pagina realizada para a UC de Engenharia Web (3 ano, 2 semestre) - Universidade do Minho</p>
-        <p>Simao Barroso (a96834)</p>
+        <p>Simão Barroso (a96834)</p>
         <img src="img/EEUM_logo_EN.png" width="100">
     </center>
     </body></html>    
