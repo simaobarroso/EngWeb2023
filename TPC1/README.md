@@ -10,7 +10,7 @@ temas:
 <li>Íris</li>
 </ol>
 
-<h4>Explicacao da resolucao</h4>
+<h4>Explicacao da resolucao:</h4>
 <p>O tema escolhido por mim foi <b>Iogurte</b>. Nesta pagina web apresento varios conceitos sobre iogurtes, como por exemplo a sua origem, a sua popularidade, bem como os iogurtes mais populares em Portugal.</p>
 <p>A resolucao deste TPC teve em vista aplicar os conceitos de HTML aprendidos na Aula Pratica 1, pelo que na concretizacao deste tive em consideracao em aplicar esses conceitos.
 Ao longo do trabalho utilizei Listas Numeradas, Listas Descritivas, bem como tabelas, aplicando os elementos inline e block aprendidos. </p>
