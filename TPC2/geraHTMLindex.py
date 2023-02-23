@@ -51,5 +51,9 @@ for d in distritos:
         """       
     pagHTML += """</ul>"""
 
+
+pagHTML += """</body>
+</html>"""
+
 print(pagHTML)
 
