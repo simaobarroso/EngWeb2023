@@ -15,7 +15,7 @@ var server = http.createServer(function(req,res){
         })
     }
     else{
-    fs.readFile('./cidades' + pedido.substring(1)+'.html', function(err,data){
+    fs.readFile('./cidades/' + pedido.substring(1)+'.html', function(err,data){
             if(err){
                 res.write("Erro na leitura do ficheiro: " + err)
             }
@@ -28,6 +28,6 @@ var server = http.createServer(function(req,res){
     
 })
 
-server.listen(7777) // a escolha da porta foi para nao entrar em conflito com nenhuma outra porta utilizada por outra aplicacao
+server.listen(8888) // a escolha da porta foi para nao entrar em conflito com nenhuma outra porta utilizada por outra aplicacao
 
-console.log("Estou a escuta na porta 7777")
+console.log("Estou a escuta na porta 8888")

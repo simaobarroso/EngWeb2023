@@ -15,8 +15,13 @@ cidades.sort(key=ordCidade)
 
 #print(cidades)
 
-pagHTML = """<!DOCTYPE html>
-<html>
+
+
+for c in cidades:
+    # e` preciso por este pedaco de codigo aqui porque???
+    # para dar reset e nao acumular????? 
+    pagHTML = """<!DOCTYPE html> 
+    <html>
     <head>
         <title>Mapa Virtual</title>
         <meta charset = "utf-8"/>
@@ -25,9 +30,7 @@ pagHTML = """<!DOCTYPE html>
         <center>
             <h1>Cidade</h1>
         </center>
-"""
-
-for c in cidades:    
+    """    
     nomefich = str(c['id'])+".html"
     f = open(nomefich,"x")    
     pagHTML += f"""
@@ -53,5 +56,6 @@ for c in cidades:
             </html>"""
     f.write(pagHTML)
     f.close()
+    #time.sleep(2)
 
 #print(pagHTML)
