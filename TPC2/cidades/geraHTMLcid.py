@@ -10,3 +10,5 @@ mapa = json.load(f)
 cidades = mapa["cidades"]
 ligações = mapa["ligações"]
 cidades.sort(key=ordCidade)
+
+
