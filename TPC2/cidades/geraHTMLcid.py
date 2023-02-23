@@ -1,5 +1,5 @@
 import json
-
+import time
 
 def ordCidade(c):
     return c['nome']
@@ -26,10 +26,11 @@ pagHTML = """<!DOCTYPE html>
             <h1>Cidade</h1>
         </center>
 """
-i = 1
-for c in cidades:
-    if i == 1:      
-        pagHTML += f"""
+
+for c in cidades:    
+    nomefich = str(c['id'])+".html"
+    f = open(nomefich,"x")    
+    pagHTML += f"""
                     <a name="{c['id']}"></a>
                     <h3>{c['nome']}</h3>
                     <p><b>População</b> {c['população']}</p>
@@ -37,18 +38,20 @@ for c in cidades:
                     <p><b>Distrito:</b>{c['distrito']}</p>
                     <h3> Ligações:</h3>
         """
-        for l in ligações:
-            if l['origem'] == c['id']:
-                for s in cidades:
-                    if s['id']==l['destino']:
+        
+    for l in ligações:
+        if l['origem'] == c['id']:
+            for s in cidades:
+                if s['id']==l['destino']:
                         pagHTML += f""" <ul>
                             <li><a href="{s['id']}">{s['nome']}</a> - {l['distância']} Km</li>
-                        </ul>
-                        """
-        pagHTML += f"""
-        <adress><a href="/"> [voltar ao Indice] </a>                
+                            </ul>
+                            """
+    pagHTML += f"""
+            <adress><a href="/"> [voltar ao Indice] </a>                
                 </body>
             </html>"""
-    i+=1
+    f.write(pagHTML)
+    f.close()
 
-print(pagHTML)
+#print(pagHTML)
