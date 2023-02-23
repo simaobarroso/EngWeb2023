@@ -57,11 +57,11 @@ for c in cidades:
             for s in cidades:
                 if s['id']==l['destino']:
                     pagHTML += f""" <ul>
-                        <li>{s['nome']} - {l['distância']} Km</li>
+                        <li><a href="#{s['id']}">{s['nome']}</a> - {l['distância']} Km</li>
                     </ul>
         
     """
-
+# Nota : href sem # refere a um recurso noutra pagina
     pagHTML += f"""
      <adress>[<a href="#indice"> voltar ao Indice] </a>                
                     <center>
