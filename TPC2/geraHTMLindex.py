@@ -41,7 +41,7 @@ for c in cidades:
 #colocar os distritos por ordem alfabetica
 sorted_keys = sorted(distritos.keys())
 distritos = {key:distritos[key] for key in sorted_keys}
-#tratar do caso de Evora estar em ultimo por causa do acento
+#tratar do caso de Evora estar em ultimo por causa do acento !
 
 for d in distritos:
     pagHTML += f"""

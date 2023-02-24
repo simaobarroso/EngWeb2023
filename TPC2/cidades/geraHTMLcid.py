@@ -41,7 +41,7 @@ for c in cidades:
                     <p><b>Distrito:</b>{c['distrito']}</p>
                     <h3> Ligações:</h3>
         """
-        
+    # pensar numa estrutura de dados mais eficientes para guardar isto    
     for l in ligações:
         if l['origem'] == c['id']:
             for s in cidades:

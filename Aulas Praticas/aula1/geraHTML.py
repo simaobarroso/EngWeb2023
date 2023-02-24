@@ -63,7 +63,7 @@ for c in cidades:
     """
 # Nota : href sem # refere a um recurso noutra pagina
     pagHTML += f"""
-     <adress>[<a href="#indice"> voltar ao Indice] </a>                
+     <adress><a href="#indice">[voltar ao Indice] </a>                
                     <center>
                         <hr width="80%">
                     </center>
