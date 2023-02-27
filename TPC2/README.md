@@ -1,6 +1,5 @@
 <h1>TPC2 - EW</h2>
 
-<p><b>Fazer CSS????????</b></p>
 
 <p>Neste exercicio tinhamos que combinar o aprendido nas duas aulas praticas anteriores: gerar paginas HTML a partir do python e criar um servidor NodeJs</p>
 
