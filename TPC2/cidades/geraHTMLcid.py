@@ -29,17 +29,14 @@ if 1 == 1:
         dist = l['distância']
         for c in cities:
             #print(c)
-            if c == o and (cities[o],str(dist),c) not in lig[c] :
-                #print("ola")
-                lig[c] += [(cities[dest],str(dist),c)]
-            elif c == o and (cities[o],str(dist),c) not in lig[c]:
-                #print("adeus")
-                lig[c] += [(cities[o],str(dist),c)]     
+            if c == o: lig[c] += [(cities[dest],str(dist),dest)]
+            elif c == dest: lig[c] += [(cities[o],str(dist),o)]     
             
 for l in lig:
     array = lig[l]
     array.sort(key=lambda x: x[0])
 
+#print(lig)
 
 
 
@@ -53,11 +50,11 @@ for c in cidades:
             </head>
             <body>
                 <center>
-                    <h1>Cidade</h1>
+                    <h1>{c['nome']}</h1>
                 </center>
             """    
     nomefich = str(c['id'])+".html"
-    f = open(nomefich,"w")    
+    f = open(nomefich,"w")   # usar flag "o" se o ficheiro nao existir 
     pagHTML += f"""
                             <a name="{c['id']}"></a>
                             <h3>{c['nome']}</h3>
