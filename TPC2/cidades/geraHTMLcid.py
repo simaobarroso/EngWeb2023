@@ -29,12 +29,12 @@ if 1 == 1:
         dist = l['distância']
         for c in cities:
             #print(c)
-            if c == o and (cities[o],str(dist)) not in lig[c] :
+            if c == o and (cities[o],str(dist),c) not in lig[c] :
                 #print("ola")
-                lig[c] += [(cities[dest],str(dist))]
-            elif c == o and (cities[o],str(dist)) not in lig[c]:
+                lig[c] += [(cities[dest],str(dist),c)]
+            elif c == o and (cities[o],str(dist),c) not in lig[c]:
                 #print("adeus")
-                lig[c] += [(cities[o],str(dist))]     
+                lig[c] += [(cities[o],str(dist),c)]     
             
 for l in lig:
     array = lig[l]
@@ -67,22 +67,14 @@ for c in cidades:
                             <h3> Ligações:</h3>
                             <ul>
                 """
-    #ligs = lig[c['nome']]        
-    for l in ligações:
-        if l['origem'] == c['id']:
-            for s in cidades:
-                if s['id']==l['destino']:
-                    pagHTML += f""" 
-                        <li><a href="#{s['id']}">{s['nome']}</a> - {l['distância']} Km</li>
+    #ligs = lig[c['nome']]    
+    array = lig[c['id']]
+
+    for elem in array:
+        pagHTML += f""" 
+                        <li><a href="{elem[2]}">{elem[0]}</a> - {elem[1]} Km</li>
         """
 
-        elif l["destino"] == c["id"]:
-            for s in cidades:
-                if s['id']==l['origem']:
-                    pagHTML += f""" 
-                        <li><a href="#{s['id']}">{s['nome']}</a> - {l['distância']} Km</li>
-
-    `"""
     pagHTML += f"""</ul>
                     <adress><a href="/"> [voltar ao Indice] </a>                
                         </body>
