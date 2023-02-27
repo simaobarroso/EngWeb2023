@@ -1,5 +1,9 @@
 import json
 import time
+import icu # pip install PyICU
+
+collator = icu.Collator.createInstance(icu.Locale('pt_PT.UTF-8'))
+
 
 def ordCidade(c):
     return c['nome']
@@ -39,7 +43,7 @@ for c in cidades:
 
 
 #colocar os distritos por ordem alfabetica
-sorted_keys = sorted(distritos.keys())
+sorted_keys = sorted(distritos.keys(), key=collator.getSortKey)
 distritos = {key:distritos[key] for key in sorted_keys}
 #tratar do caso de Evora estar em ultimo por causa do acento !
 

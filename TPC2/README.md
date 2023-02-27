@@ -11,6 +11,14 @@
 Para rodar o programa basta:
 
 <ul>
+<li>python geraHTMLindex.py > index.html </li>
+<li>python geraHTmLcid.py </li>
 <li><b>node servidor.js</b></li>
 </ul>
-Uma vez que as paginas ja estao geradas
+
+<p>E preciso ter:</p> 
+<ul>
+<li>python</li>
+<li href="https://stackoverflow.com/questions/1097908/how-do-i-sort-unicode-strings-alphabetically-in-python">PyICU</li>
+<li>NodeJS</li>
+</ul>
