@@ -20,9 +20,22 @@ var serverS = http.createServer(function(req,res){
         res.write(mypages.genMainPage())
         res.end()
     }
-
+    else if (req.url == '/lista'){
+        axios.get('http://localhost:3000/pessoas')
+            .then(function(resp){ 
+                var pessoas = resp.data 
+                if(pessoas.length != 2000) {console.log("Dataset com o tamanho errado.")} // console.log("Recuperei " + pessoas.length + " registos")
+                res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+                res.end(mypages.genListaPage(pessoas))
+            })
+            .catch(erro => { 
+                console.log("Erro "+ erro)
+                res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+                res.end("<p>Erro + " + erro + " </p>")
+            }) 
+    }
     
-    if(req.url== '/w3.css'){ // para mandarmos o css necessario
+    else if(req.url== '/w3.css'){ // para mandarmos o css necessario
         fs.readFile('w3.css', function(err,data){
             res.writeHead(200,{'Content-Type':'text/css; charset=utf-8'})
             if(err){
