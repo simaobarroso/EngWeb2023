@@ -161,8 +161,11 @@ exports.genSexoPage = function(lista){
     return pagHTML
 }
 
-exports.genSexobySexPage  = function(lista){
+exports.genSexobySexPage = function(lista){
     var data = new Date().toISOString().substring(0,16)
+
+    // estava a dar um erro no css dai o href="https://www.w3schools.com/w3css/4/w3.css"
+
     // por isto mais identado
     var pagHTML = ` 
     <!DOCTYPE html>
@@ -170,7 +173,7 @@ exports.genSexobySexPage  = function(lista){
     <head>
         <title>Aula3</title>
         <meta charset = "utf-8"/>
-        <link rel="stylesheet" href="w3.css"/> 
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
     <body>
         <div class="w3-card-4">

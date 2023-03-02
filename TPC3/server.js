@@ -7,6 +7,21 @@ var mypages = require('./genPages')
 // tratar de erros (codigos) !!!
 // OTIMIZAR E MELHORAR ISTO
 
+/*
+NOTA:
+
+    // FALTA CLICAR NA PESSOA E REDICIONAR (O QUE FICOU A FALTAR DA AULA PRATICA)
+    // BASICAMENTE CLICAR NO NOME DE UMA PESSOA DA LISTA E APARECER AS INFORMCOES DELA
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    ORGANIZAR LISTA DAS PESSOAS PELO A ORDEM DO NOME
+
+    LER ANOTACOES AO LONGO DO SERVIDOR
+
+    UTF8!!
+
+*/
+
 
 var serverS = http.createServer(function(req,res){
     var d = new Date().toISOString().substring(0,16)
@@ -28,9 +43,12 @@ var serverS = http.createServer(function(req,res){
         axios.get('http://localhost:3000/pessoas')
             .then(function(resp){ 
                 var pessoas = resp.data 
+                let pessoasOrdenadas = pessoas.sort(
+                    (p1,p2) => (p1.nome < p2.nome) ? -1 : 1 // nao usa o utf 8 dai os acentuados serem ultimos , assume sempre o ascii
+                )
                 if(pessoas.length != 2000) {console.log("Dataset com o tamanho errado.")} // console.log("Recuperei " + pessoas.length + " registos")
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                res.end(mypages.genListaPage(pessoas))
+                res.end(mypages.genListaPage(pessoasOrdenadas))
             })
             .catch(erro => { 
                 console.log("Erro "+ erro)
@@ -57,14 +75,19 @@ var serverS = http.createServer(function(req,res){
     // DEPOIS USAR URL PARA LISTAR PESSOAS DE UM SEXO (?sexo=masculino) OU USAR UM DROPDOWN (DEPOIS DECIDIR) (LISTA DE LISTAS) - Ver anotacoes
     // depois podemos clicar nas pessoas e redireciona para a pagina de uma pessoa !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 
-   else if(req.url == '/sexo/feminino'){ // nao pode ser assim porque nao temos a certeza que o dataset tem sexos definidos
+
+   //utilizar REGEX PARA DIMINUIR ISTO ???????//
+   // VER MANEIRAS DE OTIMIZAR 
+   else if(req.url == '/sexo/feminino'){ // nao pode ser assim porque nao temos a certeza que o dataset tem sexos definidoss, pensar noutra maneira !!!!!
     //pessoas?sexo=feminino
     axios.get('http://localhost:3000/pessoas?sexo=feminino')
             .then(function(resp){ 
                 var pessoas = resp.data 
-                if(pessoas.length != 2000) {console.log("Dataset com o tamanho errado.")} // console.log("Recuperei " + pessoas.length + " registos")
+                let pessoasOrdenadas = pessoas.sort(
+                    (p1,p2) => (p1.nome < p2.nome) ? -1 : 1 // nao usa o utf 8 dai os acentuados serem ultimos , assume sempre o ascii
+                )
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                res.end(mypages.genSexobySexPage(pessoas)) // ainda nao esta definida
+                res.end(mypages.genSexobySexPage(pessoasOrdenadas)) // ainda nao esta definida
             })
             .catch(erro => { 
                 console.log("Erro "+ erro)
@@ -72,6 +95,43 @@ var serverS = http.createServer(function(req,res){
                 res.end("<p>Erro + " + erro + " </p>")
             }) 
     }
+
+    else if(req.url == '/sexo/outro'){ // nao pode ser assim porque nao temos a certeza que o dataset tem sexos definidoss, pensar noutra maneira !!!!!
+        //pessoas?sexo=feminino
+        axios.get('http://localhost:3000/pessoas?sexo=outro')
+                .then(function(resp){ 
+                    var pessoas = resp.data
+                    let pessoasOrdenadas = pessoas.sort(
+                        (p1,p2) => (p1.nome < p2.nome) ? -1 : 1 // nao usa o utf 8 dai os acentuados serem ultimos , assume sempre o ascii
+                    ) 
+                    res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+                    res.end(mypages.genSexobySexPage(pessoasOrdenadas)) // ainda nao esta definida
+                })
+                .catch(erro => { 
+                    console.log("Erro "+ erro)
+                    res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+                    res.end("<p>Erro + " + erro + " </p>")
+                }) 
+        }
+     
+        else if(req.url == '/sexo/masculino'){ // nao pode ser assim porque nao temos a certeza que o dataset tem sexos definidoss, pensar noutra maneira !!!!!
+            //pessoas?sexo=feminino
+            axios.get('http://localhost:3000/pessoas?sexo=masculino')
+                    .then(function(resp){ 
+                        var pessoas = resp.data 
+                        let pessoasOrdenadas = pessoas.sort(
+                            (p1,p2) => (p1.nome < p2.nome) ? -1 : 1 // nao usa o utf 8 dai os acentuados serem ultimos , assume sempre o ascii
+                        ) 
+                        res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+                        res.end(mypages.genSexobySexPage(pessoasOrdenadas)) // ainda nao esta definida
+                    })
+                    .catch(erro => { 
+                        console.log("Erro "+ erro)
+                        res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+                        res.end("<p>Erro + " + erro + " </p>")
+                    }) 
+            }    
+
 /*
 
 
