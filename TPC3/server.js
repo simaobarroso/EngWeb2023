@@ -18,6 +18,8 @@ NOTA:
 
     LER ANOTACOES AO LONGO DO SERVIDOR
 
+    OTIMIZAR E MINIMIRZAR LINHAS DE CODIGO
+
     UTF8!!
 
 */
@@ -53,7 +55,7 @@ var serverS = http.createServer(function(req,res){
             .catch(erro => { 
                 console.log("Erro "+ erro)
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                res.end("<p>Erro + " + erro + " </p>")
+                res.end("<p>Erro  :" + erro + " </p>")
             }) 
     }
     
@@ -69,7 +71,7 @@ var serverS = http.createServer(function(req,res){
             .catch(erro => { 
                 console.log("Erro "+ erro)
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                res.end("<p>Erro + " + erro + " </p>")
+                res.end("<p>Erro  :" + erro + " </p>")
             }) 
     }
     // DEPOIS USAR URL PARA LISTAR PESSOAS DE UM SEXO (?sexo=masculino) OU USAR UM DROPDOWN (DEPOIS DECIDIR) (LISTA DE LISTAS) - Ver anotacoes
@@ -92,7 +94,7 @@ var serverS = http.createServer(function(req,res){
             .catch(erro => { 
                 console.log("Erro "+ erro)
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                res.end("<p>Erro + " + erro + " </p>")
+                res.end("<p>Erro  :" + erro + " </p>")
             }) 
     }
 
@@ -110,7 +112,7 @@ var serverS = http.createServer(function(req,res){
                 .catch(erro => { 
                     console.log("Erro "+ erro)
                     res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                    res.end("<p>Erro + " + erro + " </p>")
+                    res.end("<p>Erro  :" + erro + " </p>")
                 }) 
         }
      
@@ -128,25 +130,28 @@ var serverS = http.createServer(function(req,res){
                     .catch(erro => { 
                         console.log("Erro "+ erro)
                         res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                        res.end("<p>Erro + " + erro + " </p>")
+                        res.end("<p>Erro  :" + erro + " </p>")
                     }) 
             }    
 
-/*
+
 
 
     else if (req.url == '/desporto'){
         axios.get('http://localhost:3000/pessoas')
             .then(function(resp){ 
                 var pessoas = resp.data 
+                let pessoasOrdenadas = pessoas.sort(
+                    (p1,p2) => (p1.nome < p2.nome) ? -1 : 1 // nao usa o utf 8 dai os acentuados serem ultimos , assume sempre o ascii
+                ) 
                 if(pessoas.length != 2000) {console.log("Dataset com o tamanho errado.")} // console.log("Recuperei " + pessoas.length + " registos")
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                res.end(mypages.genDesportoPage(pessoas)) // ainda nao esta definida
+                res.end(mypages.genDesportoPage(pessoasOrdenadas)) // ainda nao esta definida
             })
             .catch(erro => { 
                 console.log("Erro "+ erro)
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                res.end("<p>Erro + " + erro + " </p>")
+                res.end("<p>Erro :" + erro + " </p>")
             }) 
     }
 
@@ -161,10 +166,10 @@ var serverS = http.createServer(function(req,res){
             .catch(erro => { 
                 console.log("Erro "+ erro)
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                res.end("<p>Erro + " + erro + " </p>")
+                res.end("<p>Erro  :" + erro + " </p>")
             }) 
     }
-*/
+
     
     else if(req.url== '/w3.css'){ // para mandarmos o css necessario
         fs.readFile('w3.css', function(err,data){
@@ -178,6 +183,19 @@ var serverS = http.createServer(function(req,res){
         
             res.end()
            })
+    }
+    else if(req.url.match(/p\d+/)){ 
+        axios.get('http://localhost:3000/pessoas/' + req.url.substring(9)) // contamos caracters a partir de /
+        .then(function(resp){ 
+            var pessoas = resp.data 
+            res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+            res.end(mypages.genPessoaPage(pessoas))
+        })
+        .catch(erro => { 
+        console.log("Erro "+ erro)
+        res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+        res.end("<p>Erro + " + erro + " </p>")
+    }) 
     }
 
 })

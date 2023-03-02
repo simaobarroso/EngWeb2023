@@ -115,7 +115,7 @@ exports.genSexoPage = function(lista){
     <!DOCTYPE html>
         <html>
     <head>
-        <title>Aula3</title>
+        <title>Sexo</title>
         <meta charset = "utf-8"/>
         <link rel="stylesheet" href="w3.css"/> 
     </head>
@@ -133,7 +133,7 @@ exports.genSexoPage = function(lista){
 
     for(let i =0; i<lista.length; i++){
       if(!sex.includes(lista[i].sexo)){
-        sex .push(lista[i].sexo)
+        sex.push(lista[i].sexo)
         // console.log(sex)
       }
      } 
@@ -171,7 +171,7 @@ exports.genSexobySexPage = function(lista){
     <!DOCTYPE html>
         <html>
     <head>
-        <title>Aula3</title>
+        <title>Sexo</title>
         <meta charset = "utf-8"/>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
@@ -225,14 +225,70 @@ exports.genSexobySexPage = function(lista){
     return pagHTML
 }
 
-/*
-exports.genDesportoPage(lista) = function(lista){
+exports.genDesportoPage = function(lista){
+
+
+    // pensar numa estrutura melhor
+    var dict = new Object();
+
+    for(let i = 0; i<lista.length;i++){
+        //=console.log(lista[i].desportos)
+        for(let j = 0; j < (lista[i].desportos).length;i++){
+            dict[lista[i].desportos[j]] = (lista[i])
+        }
+    }
+
+    var pagHTML = `  
+    <!DOCTYPE html>
+        <html>
+    <head>
+        <title>Desportos</title>
+        <meta charset = "utf-8"/>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    <body>
+        <div class="w3-card-4">
+
+        <header class="w3-container w3-teal">
+      <h1>Lista de Pessoas Por Profissao na Base de Dados (${lista.length})</h1>
+    </header>
+    
+    <a href = "/">[Voltar ao Inicio]</a>
+    <ul>
+    `
+
+    // FALTA ORGANIZAR PELO NOME (PORQUE O PROF DISSE QUE TUDO TEM DE TER UMA ORDEM)
+    for(let l = l; l< Object.keys(dict).length; l++){
+        pagHTML +=`
+            <li>${dict['rugby']}</li>
+        `
+        /* // Agora vamos percorrer o elemento de cada array
+        for
+
+        */
+    }
+
+    pagHTML += `
+    </ul>
+    <a href = "/">[Voltar ao Inicio]</a>
+
+    <footer class="w3-container w3-blue">
+      <h5>TPC3 de EW por simao :  ${data}</h5>
+    </footer>
+
+    </body>
+    </html>`
+    return pagHTML
+}
+
+
+exports.genProfissoesPage = function(lista){
     pagHTML = `<h1>AINDA NAO FOI FEITO</h1>`
     return pagHTML
 }
 
-exports.genProfissoesPage(lista) = function(lista){
+
+exports.genPessoaPage = function(pessoa){
     pagHTML = `<h1>AINDA NAO FOI FEITO</h1>`
     return pagHTML
 }
-*/
