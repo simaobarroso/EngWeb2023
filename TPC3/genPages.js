@@ -7,6 +7,8 @@ exports.genMainPage = function(){ // nao precisa de receber argumentos, a pagina
     // experimentar o href com http://localhost:5555/pessoas/
     // melhorar CSS
     // mais erro de ol !!!!!!
+
+    // ver erro do https://www.w3schools.com/w3css/4/w3.css
     var pagHTML = `
 
         <!DOCTYPE html>
@@ -51,7 +53,7 @@ exports.genListaPage = function(lista){
     <head>
         <title>Aula3</title>
         <meta charset = "utf-8"/>
-        <link rel="stylesheet" href="w3.css"/> 
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> 
     </head>
     <body>
         <div class="w3-card-4">
@@ -186,7 +188,7 @@ exports.genSexobySexPage = function(lista){
     <head>
         <title>Sexo</title>
         <meta charset = "utf-8"/>
-        <link rel="stylesheet" href="w3.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
     <body>
         <div class="w3-card-4">
@@ -239,66 +241,66 @@ exports.genSexobySexPage = function(lista){
     return pagHTML
 }
 
-exports.genDesportoPage = function(lista){
-
-
-    // pensar numa estrutura melhor
-    var dict = new Object();
-try{
-    for(let i = 0; i<lista.length;i++){
-        //=console.log(lista[i].desportos)
-        for(let j = 0; j < (lista[i].desportos.length);i++){
-            //console.log("Ola Joao") -> tem todos desportos ver isto + melhorar css
-            dict[lista[i].desportos[j]] = (lista[i])
-        }
-    }
-} catch(err){
-    console.log("error")
-}
-    var pagHTML = `  
+exports.genDesportoPage = function(pessoas){
+    var data = new Date().toISOString().substring(0,16)
+    var pagHTML = ` 
     <!DOCTYPE html>
         <html>
     <head>
-        <title>Desportos</title>
+        <title>Desporto</title>
         <meta charset = "utf-8"/>
-        <link rel="stylesheet" href="w3.css">
+        <link rel="stylesheet" href="w3.css"/> 
     </head>
     <body>
         <div class="w3-card-4">
 
         <header class="w3-container w3-teal">
-      <h1>Lista de Pessoas Por Profissao na Base de Dados (${lista.length})</h1>
+      <h1>Lista de Desportos na Base de Dados</h1>
     </header>
     
     <a href = "/">[Voltar ao Inicio]</a>
-    <ul>
-    `
+    <ul w3-hoverable class="w3-ul w3-xxlarge">
+     `   
 
-        // FALTA ORGANIZAR PELO NOME (PORQUE O PROF DISSE QUE TUDO TEM DE TER UMA ORDEM)
+     let desportosDict = new Object()
+     pessoas.forEach((p) => {
+             p.desportos.forEach((d) => {
+                 if (desportosDict.hasOwnProperty(d)) {
+                     desportosDict[d]++
+                 }
+                 else {
+                     desportosDict[d] = 1
+                 }
+             }
+         )
+     }
 
-    for(let l = 0; l< Object.keys(dict).length; l++){
-        pagHTML +=`
-            <li>${l}</li>
+ )
+
+
+
+     for(var desporto in desportosDict){
+        pagHTML += `
+            <li class="w3-ul w3-hoverable"><a href="/desporto/${desporto}">${desporto} - ${desportosDict[desporto]}</a></li>
         `
-        /* // Agora vamos percorrer o elemento de cada array
-        for
+       } 
 
-        */
-    }
 
     pagHTML += `
     </ul>
     <a href = "/">[Voltar ao Inicio]</a>
 
+    </div>
     <footer class="w3-container w3-blue">
       <h5>TPC3 de EW por simao :  ${data}</h5>
     </footer>
-
+    
+    </div>
     </body>
-    </html>`
+    </html>
+    `
     return pagHTML
 }
-
 
 exports.genProfissoesPage = function(lista){
     pagHTML = `<h1>AINDA NAO FOI FEITO</h1>`

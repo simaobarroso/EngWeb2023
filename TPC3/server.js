@@ -108,7 +108,7 @@ var serverS = http.createServer(function(req,res){
                 res.end(mypages.genSexobySexPage(pessoasOrdenadas)) // ainda nao esta definida
             })
             .catch(erro => { 
-                //console.log("Erro "+ erro)
+                //console.log("Erro "+ erro) // VER ESTE ERRO
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
                 res.end("<p>Erro  :" + erro + " </p>")
             }) 
@@ -119,12 +119,10 @@ var serverS = http.createServer(function(req,res){
         axios.get('http://localhost:3000/pessoas')
             .then(function(resp){ 
                 var pessoas = resp.data 
-                let pessoasOrdenadas = pessoas.sort(
-                    (p1,p2) => (p1.nome < p2.nome) ? -1 : 1 // nao usa o utf 8 dai os acentuados serem ultimos , assume sempre o ascii
-                ) 
-                if(pessoas.length != 2000) {console.log("Dataset com o tamanho errado.")} // console.log("Recuperei " + pessoas.length + " registos")
+
+
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                res.end(mypages.genDesportoPage(pessoasOrdenadas)) // ainda nao esta definida
+                res.end(mypages.genDesportoPage(pessoas)) // ainda nao esta definida
             })
             .catch(erro => { 
                 console.log("Erro "+ erro)
@@ -132,6 +130,33 @@ var serverS = http.createServer(function(req,res){
                 res.end("<p>Erro :" + erro + " </p>")
             }) 
     }
+
+    else if (req.url.match(/desporto\/[a-zA-Z]+/)){
+        axios.get('http://localhost:3000/pessoas')
+            .then(function(resp){ 
+                var pessoas = resp.data 
+                let pessoasOrdenadas = pessoas.sort(
+                    (p1,p2) => (p1.nome < p2.nome) ? -1 : 1 // nao usa o utf 8 dai os acentuados serem ultimos , assume sempre o ascii
+                ) 
+                
+                var desporto = decodeURIComponent(req.url.substring(10))
+
+                var lista = new Array()
+            
+                pessoasOrdenadas.forEach((p) => {
+                    if(p.desportos.includes(desporto)) lista.push(p)
+                })
+
+                res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+                res.end(mypages.genListaPage(lista)) // ainda nao esta definida
+            })
+            .catch(erro => { 
+                console.log("Erro "+ erro)
+                res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+                res.end("<p>Erro :" + erro + " </p>")
+            }) 
+    }
+
 
     else if (req.url == '/profissoes'){
         axios.get('http://localhost:3000/pessoas')
