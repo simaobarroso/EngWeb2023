@@ -303,10 +303,74 @@ exports.genDesportoPage = function(pessoas){
 }
 
 exports.genProfissoesPage = function(lista){
-    pagHTML = `<h1>AINDA NAO FOI FEITO</h1>`
-    return pagHTML
-}
+    var data = new Date().toISOString().substring(0,16)
+    var pagHTML = ` 
+    <!DOCTYPE html>
+        <html>
+    <head>
+        <title>Desporto</title>
+        <meta charset = "utf-8"/>
+        <link rel="stylesheet" href="w3.css"/> 
+    </head>
+    <body>
+        <div class="w3-card-4">
 
+        <header class="w3-container w3-teal">
+      <h1>Lista de Desportos na Base de Dados</h1>
+    </header>
+    
+    <a href = "/">[Voltar ao Inicio]</a>
+    <ul w3-hoverable class="w3-ul w3-xxlarge">
+     `   
+
+     let profDict = new Object()
+     lista.forEach((p) => {
+        {
+        if (profDict.hasOwnProperty(p.profissao)) {
+            profDict[p.profissao]++
+        }
+        else {
+            profDict[p.profissao] = 1  
+     }
+        }
+    }
+    )
+
+
+
+var entries = Object.entries(profDict);
+
+entries.sort(function(a, b) {
+  return b[1] - a[1];
+});
+
+var top10 = entries.slice(0, 10);
+ 
+console.log(top10)
+
+
+     for(var prof in top10){
+        pagHTML += `
+            <li class="w3-ul w3-hoverable"><a href="/profissoes/${top10[prof][0]}">${top10[prof][0]} - ${top10[prof][1]}</a></li>
+        `
+       } 
+
+
+    pagHTML += `
+    </ul>
+    <a href = "/">[Voltar ao Inicio]</a>
+
+    </div>
+    <footer class="w3-container w3-blue">
+      <h5>TPC3 de EW por simao :  ${data}</h5>
+    </footer>
+    
+    </div>
+    </body>
+    </html>
+    `
+    return pagHTML
+    }
 
 exports.genPessoaPage = function(pessoa){
     pagHTML = `<h1>AINDA NAO FOI FEITO</h1>`

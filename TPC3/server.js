@@ -162,8 +162,7 @@ var serverS = http.createServer(function(req,res){
         axios.get('http://localhost:3000/pessoas')
             .then(function(resp){ 
                 var pessoas = resp.data 
-                if(pessoas.length != 2000) {console.log("Dataset com o tamanho errado.")} // console.log("Recuperei " + pessoas.length + " registos")
-                res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+                
                 res.end(mypages.genProfissoesPage(pessoas)) // ainda nao esta definida
             })
             .catch(erro => { 
@@ -172,9 +171,35 @@ var serverS = http.createServer(function(req,res){
                 res.end("<p>Erro  :" + erro + " </p>")
             }) 
     }
-
     
-    else if(req.url.match(/w3\.css/)){ // para mandarmos o css necessario
+
+    else if (req.url.match(/profissoes\/[a-zA-Z]+/)){
+        axios.get('http://localhost:3000/pessoas')
+            .then(function(resp){ 
+                var pessoas = resp.data 
+                let pessoasOrdenadas = pessoas.sort(
+                    (p1,p2) => (p1.nome < p2.nome) ? -1 : 1 // nao usa o utf 8 dai os acentuados serem ultimos , assume sempre o ascii
+                ) 
+
+                var profissoes = decodeURIComponent(req.url.substring(12))
+
+                var lista = new Array()
+            
+                pessoasOrdenadas.forEach((p) => {
+                    if(p.profissao.includes(profissoes)) lista.push(p)
+                })
+
+                res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+                res.end(mypages.genListaPage(lista)) // ainda nao esta definida
+            })
+            .catch(erro => { 
+                console.log("Erro "+ erro)
+                res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+                res.end("<p>Erro  :" + erro + " </p>")
+            }) 
+    }
+    
+    else if(req.url.match(/w3\.css/)){ // para mandarmos o css necessario // MUDAR REGEX DISTO
         fs.readFile('w3.css', function(err,data){
             res.writeHead(200,{'Content-Type':'text/css; charset=utf-8'})
             if(err){
