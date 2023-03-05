@@ -24,7 +24,9 @@ exports.genMainPage = function(){ // nao precisa de receber argumentos, a pagina
 
 
     <ol w3-hoverable class="w3-ul w3-xxlarge">
+    
         <li class="w3-ul w3-hoverable"><a href="/lista">Lista de Pessoas</a></li>
+        <li class="w3-ul w3-hoverable"><a href="/listaordenadas">Lista Ordenada de Pessoas</a></li>
         <li class="w3-ul w3-hoverable"><a href="/sexo">Distribuicao Por Sexo</a></li>
         <li class="w3-ul w3-hoverable"><a href="/desporto">Distribuicao Por Desporto</a></li>
         <li class="w3-ul w3-hoverable"><a href="/profissoes">Top 10 profissoes</a></li>
@@ -80,6 +82,7 @@ exports.genListaPage = function(lista){
         <td>${lista[i].idade}</td>
         <td>${lista[i].sexo}</td>
         <td>${lista[i].morada.cidade}</td>
+
     </tr>`
      }
      
@@ -129,18 +132,28 @@ exports.genSexoPage = function(lista){
     <a href = "/">[Voltar ao Inicio]</a>
     <ul w3-hoverable class="w3-ul w3-xxlarge">
      `   
-    let sex = []
+    let sex = {
+        "feminino" : 0,
+        "masculino" : 0
+    }
 
     for(let i =0; i<lista.length; i++){
-      if(!sex.includes(lista[i].sexo)){
-        sex.push(lista[i].sexo)
+        if (sex.hasOwnProperty(lista[i].sexo)) {
+            sex[lista[i].sexo]++
+        }
+        else {
+            sex[lista[i].sexo] = 1
+        }
+
+      //if(!sex.includes(lista[i].sexo)){
+        //sex.push(lista[i].sexo)
         // console.log(sex)
-      }
+      //}
      } 
 
-     for(let j =0; j<sex.length; j++){
+     for(let j in sex){
         pagHTML += `
-            <li class="w3-ul w3-hoverable"><a href="/sexo/${sex[j]}">${sex[j]}</a></li>
+            <li class="w3-ul w3-hoverable"><a href="/sexo/${j}">${j} - ${sex[j]}</a></li>
         `
        } 
      
@@ -173,7 +186,7 @@ exports.genSexobySexPage = function(lista){
     <head>
         <title>Sexo</title>
         <meta charset = "utf-8"/>
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="w3.css">
     </head>
     <body>
         <div class="w3-card-4">
@@ -204,6 +217,7 @@ exports.genSexobySexPage = function(lista){
         <td>${lista[i].idade}</td>
         <td>${lista[i].sexo}</td>
         <td>${lista[i].morada.cidade}</td>
+
     </tr>`
      }
      
@@ -230,21 +244,24 @@ exports.genDesportoPage = function(lista){
 
     // pensar numa estrutura melhor
     var dict = new Object();
-
+try{
     for(let i = 0; i<lista.length;i++){
         //=console.log(lista[i].desportos)
-        for(let j = 0; j < (lista[i].desportos).length;i++){
+        for(let j = 0; j < (lista[i].desportos.length);i++){
+            //console.log("Ola Joao") -> tem todos desportos ver isto + melhorar css
             dict[lista[i].desportos[j]] = (lista[i])
         }
     }
-
+} catch(err){
+    console.log("error")
+}
     var pagHTML = `  
     <!DOCTYPE html>
         <html>
     <head>
         <title>Desportos</title>
         <meta charset = "utf-8"/>
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="w3.css">
     </head>
     <body>
         <div class="w3-card-4">
@@ -257,10 +274,11 @@ exports.genDesportoPage = function(lista){
     <ul>
     `
 
-    // FALTA ORGANIZAR PELO NOME (PORQUE O PROF DISSE QUE TUDO TEM DE TER UMA ORDEM)
-    for(let l = l; l< Object.keys(dict).length; l++){
+        // FALTA ORGANIZAR PELO NOME (PORQUE O PROF DISSE QUE TUDO TEM DE TER UMA ORDEM)
+
+    for(let l = 0; l< Object.keys(dict).length; l++){
         pagHTML +=`
-            <li>${dict['rugby']}</li>
+            <li>${l}</li>
         `
         /* // Agora vamos percorrer o elemento de cada array
         for

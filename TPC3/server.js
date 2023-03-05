@@ -45,6 +45,21 @@ var serverS = http.createServer(function(req,res){
         axios.get('http://localhost:3000/pessoas')
             .then(function(resp){ 
                 var pessoas = resp.data 
+                if(pessoas.length != 2000) {console.log("Dataset com o tamanho errado.")} // console.log("Recuperei " + pessoas.length + " registos")
+                res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+                res.end(mypages.genListaPage(pessoas))
+            })
+            .catch(erro => { 
+                console.log("Erro "+ erro)
+                res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
+                res.end("<p>Erro  :" + erro + " </p>")
+            }) 
+    }
+    
+    else if (req.url == '/listaordenadas'){
+        axios.get('http://localhost:3000/pessoas')
+            .then(function(resp){ 
+                var pessoas = resp.data 
                 let pessoasOrdenadas = pessoas.sort(
                     (p1,p2) => (p1.nome < p2.nome) ? -1 : 1 // nao usa o utf 8 dai os acentuados serem ultimos , assume sempre o ascii
                 )
@@ -58,7 +73,7 @@ var serverS = http.createServer(function(req,res){
                 res.end("<p>Erro  :" + erro + " </p>")
             }) 
     }
-    
+
     else if (req.url == '/sexo'){
         // https://www.semrush.com/blog/url-parameters/
         axios.get('http://localhost:3000/pessoas')
@@ -80,9 +95,10 @@ var serverS = http.createServer(function(req,res){
 
    //utilizar REGEX PARA DIMINUIR ISTO ???????//
    // VER MANEIRAS DE OTIMIZAR 
-   else if(req.url == '/sexo/feminino'){ // nao pode ser assim porque nao temos a certeza que o dataset tem sexos definidoss, pensar noutra maneira !!!!!
+   else if(req.url.match(/sexo\/\w+/)){ // nao pode ser assim porque nao temos a certeza que o dataset tem sexos definidoss, pensar noutra maneira !!!!!
     //pessoas?sexo=feminino
-    axios.get('http://localhost:3000/pessoas?sexo=feminino')
+    let aux = req.url.match(/sexo\/\w+/)[0].slice(5)
+    axios.get('http://localhost:3000/pessoas?sexo=' +  aux)
             .then(function(resp){ 
                 var pessoas = resp.data 
                 let pessoasOrdenadas = pessoas.sort(
@@ -92,49 +108,11 @@ var serverS = http.createServer(function(req,res){
                 res.end(mypages.genSexobySexPage(pessoasOrdenadas)) // ainda nao esta definida
             })
             .catch(erro => { 
-                console.log("Erro "+ erro)
+                //console.log("Erro "+ erro)
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
                 res.end("<p>Erro  :" + erro + " </p>")
             }) 
     }
-
-    else if(req.url == '/sexo/outro'){ // nao pode ser assim porque nao temos a certeza que o dataset tem sexos definidoss, pensar noutra maneira !!!!!
-        //pessoas?sexo=feminino
-        axios.get('http://localhost:3000/pessoas?sexo=outro')
-                .then(function(resp){ 
-                    var pessoas = resp.data
-                    let pessoasOrdenadas = pessoas.sort(
-                        (p1,p2) => (p1.nome < p2.nome) ? -1 : 1 // nao usa o utf 8 dai os acentuados serem ultimos , assume sempre o ascii
-                    ) 
-                    res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                    res.end(mypages.genSexobySexPage(pessoasOrdenadas)) // ainda nao esta definida
-                })
-                .catch(erro => { 
-                    console.log("Erro "+ erro)
-                    res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                    res.end("<p>Erro  :" + erro + " </p>")
-                }) 
-        }
-     
-        else if(req.url == '/sexo/masculino'){ // nao pode ser assim porque nao temos a certeza que o dataset tem sexos definidoss, pensar noutra maneira !!!!!
-            //pessoas?sexo=feminino
-            axios.get('http://localhost:3000/pessoas?sexo=masculino')
-                    .then(function(resp){ 
-                        var pessoas = resp.data 
-                        let pessoasOrdenadas = pessoas.sort(
-                            (p1,p2) => (p1.nome < p2.nome) ? -1 : 1 // nao usa o utf 8 dai os acentuados serem ultimos , assume sempre o ascii
-                        ) 
-                        res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                        res.end(mypages.genSexobySexPage(pessoasOrdenadas)) // ainda nao esta definida
-                    })
-                    .catch(erro => { 
-                        console.log("Erro "+ erro)
-                        res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                        res.end("<p>Erro  :" + erro + " </p>")
-                    }) 
-            }    
-
-
 
 
     else if (req.url == '/desporto'){
@@ -171,7 +149,7 @@ var serverS = http.createServer(function(req,res){
     }
 
     
-    else if(req.url== '/w3.css'){ // para mandarmos o css necessario
+    else if(req.url.match(/w3\.css/)){ // para mandarmos o css necessario
         fs.readFile('w3.css', function(err,data){
             res.writeHead(200,{'Content-Type':'text/css; charset=utf-8'})
             if(err){
