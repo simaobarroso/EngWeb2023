@@ -107,12 +107,6 @@ exports.genListaPage = function(lista){
 }
 
 
-
-
-
-// Para gerar a pagica de distribuicao por sexo (lista de sexos)
-// FAlta fazer redirecionamento
-
 exports.genSexoPage = function(lista){ 
     var data = new Date().toISOString().substring(0,16)
     // por isto mais identado
@@ -132,7 +126,14 @@ exports.genSexoPage = function(lista){
     </header>
     
     <a href = "/">[Voltar ao Inicio]</a>
-    <ul w3-hoverable class="w3-ul w3-xxlarge">
+      <div class="w3-container">
+                            <div class="w3-container">
+                            <table class="w3-table-all">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Sexo</th>
+                                    <th>Número de Pessoas</th>
+                                </tr>
      `   
     let sex = {
         "feminino" : 0,
@@ -146,22 +147,35 @@ exports.genSexoPage = function(lista){
         else {
             sex[lista[i].sexo] = 1
         }
-
-      //if(!sex.includes(lista[i].sexo)){
-        //sex.push(lista[i].sexo)
-        // console.log(sex)
-      //}
      } 
 
-     for(let j in sex){
-        pagHTML += `
-            <li class="w3-ul w3-hoverable"><a href="/sexo/${j}">${j} - ${sex[j]}</a></li>
-        `
-       } 
-     
+     var entries = Object.entries(sex);
+
+entries.sort(function(a, b) {
+  return b[1] - a[1];
+});
+
+    let i = 0
+      for(let j in entries){
+        i++
+         pagHTML += `
+                                <tr>
+                        <td>${i}</td>
+                        <td>${entries[j][0]}</td>
+                        <td>
+                            <a href="/sexo/${entries[j][0]}">
+                            ${entries[j][1]}
+                            </a>
+                        </td>
+                </tr>
+
+         `
+        } 
+      
 
     pagHTML += `
-    </ul>
+        </table>
+                        </div>
     <a href = "/">[Voltar ao Inicio]</a>
 
     </div>
@@ -259,7 +273,14 @@ exports.genDesportoPage = function(pessoas){
     </header>
     
     <a href = "/">[Voltar ao Inicio]</a>
-    <ul w3-hoverable class="w3-ul w3-xxlarge">
+     <div class="w3-container">
+                            <div class="w3-container">
+                            <table class="w3-table-all">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Desporto</th>
+                                    <th>Número de Pessoas</th>
+                                </tr>
      `   
 
      let desportosDict = new Object()
@@ -277,16 +298,42 @@ exports.genDesportoPage = function(pessoas){
 
  )
 
+ var entries = Object.entries(desportosDict);
+
+ entries.sort(function(a, b) {
+   return b[1] - a[1];
+ });
+ 
+    let i = 0
+      for(let j in entries){
+        i++
+         pagHTML += `
+                                <tr>
+                        <td>${i}</td>
+                        <td>${entries[j][0]}</td>
+                        <td>
+                            <a href="/desporto/${entries[j][0]}">
+                            ${entries[j][1]}
+                            </a>
+                        </td>
+                </tr>
+
+         `
+        } 
+      
 
 
+        /*
      for(var desporto in desportosDict){
         pagHTML += `
             <li class="w3-ul w3-hoverable"><a href="/desporto/${desporto}">${desporto} - ${desportosDict[desporto]}</a></li>
         `
        } 
-
+       */
 
     pagHTML += `
+     </table>
+                        </div>
     </ul>
     <a href = "/">[Voltar ao Inicio]</a>
 
@@ -308,7 +355,7 @@ exports.genProfissoesPage = function(lista){
     <!DOCTYPE html>
         <html>
     <head>
-        <title>Desporto</title>
+        <title>Profissoes</title>
         <meta charset = "utf-8"/>
         <link rel="stylesheet" href="w3.css"/> 
     </head>
@@ -316,12 +363,25 @@ exports.genProfissoesPage = function(lista){
         <div class="w3-card-4">
 
         <header class="w3-container w3-teal">
-      <h1>Lista de Desportos na Base de Dados</h1>
+      <h1>Lista de Profissoes na Base de Dados</h1>
     </header>
     
     <a href = "/">[Voltar ao Inicio]</a>
-    <ul w3-hoverable class="w3-ul w3-xxlarge">
+    
+    <div class="w3-container">
+                            <div class="w3-container">
+                            <table class="w3-table-all">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Profissao</th>
+                                    <th>Número de Pessoas</th>
+                                </tr>
+
+    
+
+    
      `   
+
 
      let profDict = new Object()
      lista.forEach((p) => {
@@ -346,18 +406,28 @@ entries.sort(function(a, b) {
 
 var top10 = entries.slice(0, 10);
  
-console.log(top10)
+//console.log(top10)
 
-
+    let i = 0
      for(var prof in top10){
+        i++
         pagHTML += `
-            <li class="w3-ul w3-hoverable"><a href="/profissoes/${top10[prof][0]}">${top10[prof][0]} - ${top10[prof][1]}</a></li>
+                    <tr>
+                        <td>${i}</td>
+                        <td>${top10[prof][0]}</td>
+                        <td>
+                            <a href="/profissoes/${top10[prof][0]}">
+                            ${top10[prof][1]}
+                            </a>
+                        </td>
+                </tr>
         `
        } 
 
 
     pagHTML += `
-    </ul>
+       </table>
+                        </div>
     <a href = "/">[Voltar ao Inicio]</a>
 
     </div>
@@ -381,10 +451,11 @@ exports.genPessoaPage = function(pessoa){
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>About people</title>
+        <title>Pessoa</title>
         <link rel="stylesheet" href="w3.css"/>
     </head>
     <body>
+       <a href = "/">[Voltar ao Inicio]</a>
         <div class="w3-card-4">
         <header class="w3-container w3-teal">
           <h1 class="w3-center">${pessoa.nome}</h1>
@@ -452,10 +523,10 @@ exports.genPessoaPage = function(pessoa){
 
             for(var key in pessoa.atributos){
                 if(pessoa.atributos[key] === true){
-                    pagHTML += `<th><i class="fa-light fa-thumbs-up w3-green"></i></th>`
+                    pagHTML += `<th>Sim</th>`
                 }
                 else if(pessoa.atributos[key] === false){
-                    pagHTML += `<th><i class="fa-light fa-thumbs-down w3-red"></i></th>`
+                    pagHTML += `<th>Nao</th>`
                 }
                 else {
                     pagHTML += `<th>${pessoa.atributos[key]}</th>`

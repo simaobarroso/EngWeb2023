@@ -4,26 +4,6 @@ var fs = require('fs');
 var axios =require('axios')
 var mypages = require('./genPages') 
 
-// tratar de erros (codigos) !!!
-// OTIMIZAR E MELHORAR ISTO
-
-/*
-NOTA:
-
-    // FALTA CLICAR NA PESSOA E REDICIONAR (O QUE FICOU A FALTAR DA AULA PRATICA)
-    // BASICAMENTE CLICAR NO NOME DE UMA PESSOA DA LISTA E APARECER AS INFORMCOES DELA
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    ORGANIZAR LISTA DAS PESSOAS PELO A ORDEM DO NOME
-
-    LER ANOTACOES AO LONGO DO SERVIDOR
-
-    OTIMIZAR E MINIMIRZAR LINHAS DE CODIGO
-
-    UTF8!!
-
-*/
-
 
 var serverS = http.createServer(function(req,res){
     var d = new Date().toISOString().substring(0,16)
@@ -38,9 +18,6 @@ var serverS = http.createServer(function(req,res){
         res.write(mypages.genMainPage())
         res.end()
     }
-    // FALTA CLICAR NA PESSOA E REDICIONAR (O QUE FICOU A FALTAR DA AULA PRATICA)
-    // BASICAMENTE CLICAR NO NOME DE UMA PESSOA DA LISTA E APARECER AS INFORMCOES DELA
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     else if (req.url == '/lista'){
         axios.get('http://localhost:3000/pessoas')
             .then(function(resp){ 
@@ -63,7 +40,7 @@ var serverS = http.createServer(function(req,res){
                 let pessoasOrdenadas = pessoas.sort(
                     (p1,p2) => (p1.nome < p2.nome) ? -1 : 1 // nao usa o utf 8 dai os acentuados serem ultimos , assume sempre o ascii
                 )
-                if(pessoas.length != 2000) {console.log("Dataset com o tamanho errado.")} // console.log("Recuperei " + pessoas.length + " registos")
+                if(pessoas.length != 2000) {console.log("Dataset com o tamanho errado.")} 
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
                 res.end(mypages.genListaPage(pessoasOrdenadas))
             })
@@ -75,7 +52,7 @@ var serverS = http.createServer(function(req,res){
     }
 
     else if (req.url == '/sexo'){
-        // https://www.semrush.com/blog/url-parameters/
+
         axios.get('http://localhost:3000/pessoas')
             .then(function(resp){ 
                 var pessoas = resp.data 
@@ -89,14 +66,7 @@ var serverS = http.createServer(function(req,res){
                 res.end("<p>Erro  :" + erro + " </p>")
             }) 
     }
-    // DEPOIS USAR URL PARA LISTAR PESSOAS DE UM SEXO (?sexo=masculino) OU USAR UM DROPDOWN (DEPOIS DECIDIR) (LISTA DE LISTAS) - Ver anotacoes
-    // depois podemos clicar nas pessoas e redireciona para a pagina de uma pessoa !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-
-
-   //utilizar REGEX PARA DIMINUIR ISTO ???????//
-   // VER MANEIRAS DE OTIMIZAR 
-   else if(req.url.match(/sexo\/\w+/)){ // nao pode ser assim porque nao temos a certeza que o dataset tem sexos definidoss, pensar noutra maneira !!!!!
-    //pessoas?sexo=feminino
+   else if(req.url.match(/sexo\/\w+/)){
     let aux = req.url.match(/sexo\/\w+/)[0].slice(5)
     axios.get('http://localhost:3000/pessoas?sexo=' +  aux)
             .then(function(resp){ 
@@ -108,7 +78,7 @@ var serverS = http.createServer(function(req,res){
                 res.end(mypages.genSexobySexPage(pessoasOrdenadas)) // ainda nao esta definida
             })
             .catch(erro => { 
-                //console.log("Erro "+ erro) // VER ESTE ERRO
+                console.log("Erro "+ erro) // VER ESTE ERRO
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
                 res.end("<p>Erro  :" + erro + " </p>")
             }) 
@@ -148,7 +118,7 @@ var serverS = http.createServer(function(req,res){
                 })
 
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});
-                res.end(mypages.genListaPage(lista)) // ainda nao esta definida
+                res.end(mypages.genListaPage(lista))
             })
             .catch(erro => { 
                 console.log("Erro "+ erro)
@@ -163,7 +133,7 @@ var serverS = http.createServer(function(req,res){
             .then(function(resp){ 
                 var pessoas = resp.data 
                 
-                res.end(mypages.genProfissoesPage(pessoas)) // ainda nao esta definida
+                res.end(mypages.genProfissoesPage(pessoas)) 
             })
             .catch(erro => { 
                 console.log("Erro "+ erro)
@@ -199,7 +169,7 @@ var serverS = http.createServer(function(req,res){
             }) 
     }
     
-    else if(req.url.match(/w3\.css/)){ // para mandarmos o css necessario // MUDAR REGEX DISTO
+    else if(req.url.match(/w3\.css/)){ // para mandarmos o css necessario 
         fs.readFile('w3.css', function(err,data){
             res.writeHead(200,{'Content-Type':'text/css; charset=utf-8'})
             if(err){
@@ -231,11 +201,6 @@ var serverS = http.createServer(function(req,res){
 serverS.listen(5555)
 
 console.log("Estou a escuta na porta 5555")
-
-
-
-
-
 
 
 

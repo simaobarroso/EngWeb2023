@@ -3,7 +3,7 @@
 import json
 import time
 
-f = open("dataset-extra1.json")
+f = open("dataset.json")
 dataset = json.load(f)
 
 #print(dataset)
@@ -16,7 +16,7 @@ for data in dataset['pessoas']:
     data["id"] = id # ordem nao interessa mas melhoria seria por isto em primeiro !!!
 
 
-fwrite = open("datasetAlterado.json","w")
+fwrite = open("datasetGrandeAlterado.json","w")
 #fwrite.write(dataset) # escrevemos para um ficheiro diferente para evitar perda do dataset
 
 json.dump(dataset,fwrite)
