@@ -373,6 +373,104 @@ console.log(top10)
     }
 
 exports.genPessoaPage = function(pessoa){
-    pagHTML = `<h1>AINDA NAO FOI FEITO</h1>`
+    var data = new Date().toISOString().substring(0,16)
+   
+
+    var pagHTML = `
+    <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>About people</title>
+        <link rel="stylesheet" href="w3.css"/>
+    </head>
+    <body>
+        <div class="w3-card-4">
+        <header class="w3-container w3-teal">
+          <h1 class="w3-center">${pessoa.nome}</h1>
+        </header>
+        <ul class="w3-ul w3-card-4 w3-hoverable " style="width:100%">
+            <li><b>Idade: </b> ${pessoa.idade}</li>
+            <li><b>Sexo: </b> ${pessoa.sexo}</li>
+            <li><b>Morada: </b> ${pessoa.morada.cidade} - ${pessoa.morada.distrito}</li>
+            <li><b>BI: </b> ${pessoa.BI}</li>
+            <li><b>Descrição: </b> ${pessoa.descrição}</li>
+            <li><b>Profissão: </b> ${pessoa.profissao}</li>
+            <li><b>Partido Político: </b> ${pessoa.partido_politico.party_abbr} - ${pessoa.partido_politico.party_name}</li>
+            <li><b>Marca do carro: </b>${pessoa.marca_carro}</li>
+            <li><b>Desportos:</b>
+            `
+        
+        for(let i = 0; i < pessoa.desportos.length ; i++){
+            pagHTML += ` ${pessoa.desportos[i]}`
+            if(i < pessoa.desportos.length - 1) pagHTML += `, `
+        }
+        
+        pagHTML += `</li>
+        <li><b>Animais:</b>
+        `
+        for(let i = 0; i < pessoa.animais.length ; i++){
+            pagHTML += ` ${pessoa.animais[i]}`
+            if(i < pessoa.animais.length - 1) pagHTML += `, `
+        }
+
+        pagHTML += `</li>
+        <li><b>Figuras públicas PT:</b>
+        `
+
+        for(let i = 0; i < pessoa.figura_publica_pt.length ; i++){
+            pagHTML += ` ${pessoa.figura_publica_pt[i]}`
+            if(i < pessoa.figura_publica_pt.length - 1) pagHTML += `, `
+        }
+
+        pagHTML += `</li>
+        <li><b>Destinos favoritos:</b>
+        `
+
+        for(let i = 0; i < pessoa.destinos_favoritos.length ; i++){
+            pagHTML += ` ${pessoa.destinos_favoritos[i]}`
+            if(i < pessoa.destinos_favoritos.length - 1) pagHTML += `, `
+        }
+
+        pagHTML += `</li>    
+            </ul>
+        <div class="w3-container w3-margin-top">
+            <table class="w3-table-all w3-centered w3-hoverable w3-large" style="width: 100%;">
+            <tr>
+              <th>Fumador</th>
+              <th>Gosta de cinema</th>
+              <th>Gosta de viajar</th>
+              <th>Acorda cedo</th>
+              <th>Gosta de ler</th>
+              <th>Gosta de música</th>
+              <th>Gosta de comer</th>
+              <th>Gosta de animais de estimação</th>
+              <th>Gosta de dançar</th>
+              <th>Comida Favorita</th>
+            </tr>
+            <tr>`
+
+            for(var key in pessoa.atributos){
+                if(pessoa.atributos[key] === true){
+                    pagHTML += `<th><i class="fa-light fa-thumbs-up w3-green"></i></th>`
+                }
+                else if(pessoa.atributos[key] === false){
+                    pagHTML += `<th><i class="fa-light fa-thumbs-down w3-red"></i></th>`
+                }
+                else {
+                    pagHTML += `<th>${pessoa.atributos[key]}</th>`
+                }
+            }    
+        
+        pagHTML += `</tr></table></div>
+        <a href = "/">[Voltar ao Inicio]</a>
+        <footer class="w3-container w3-blue">
+        <h5>TPC3 de EW por simao : ${data}</h5>
+      </footer>
+        </div>
+        
+    </body>
+</html>
+    `
     return pagHTML
 }
