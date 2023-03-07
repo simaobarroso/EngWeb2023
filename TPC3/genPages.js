@@ -4,11 +4,6 @@
 exports.genMainPage = function(){ // nao precisa de receber argumentos, a pagina e` independemente do dataset usado
     var data = new Date().toISOString().substring(0,16)
 
-    // experimentar o href com http://localhost:5555/pessoas/
-    // melhorar CSS
-    // mais erro de ol !!!!!!
-
-    // ver erro do https://www.w3schools.com/w3css/4/w3.css
     var pagHTML = `
 
         <!DOCTYPE html>
@@ -29,9 +24,9 @@ exports.genMainPage = function(){ // nao precisa de receber argumentos, a pagina
     
         <li class="w3-ul w3-hoverable"><a href="/lista">Lista de Pessoas</a></li>
         <li class="w3-ul w3-hoverable"><a href="/listaordenadas">Lista Ordenada de Pessoas</a></li>
-        <li class="w3-ul w3-hoverable"><a href="/sexo">Distribuicao Por Sexo</a></li>
-        <li class="w3-ul w3-hoverable"><a href="/desporto">Distribuicao Por Desporto</a></li>
-        <li class="w3-ul w3-hoverable"><a href="/profissoes">Top 10 profissoes</a></li>
+        <li class="w3-ul w3-hoverable"><a href="/sexo">Distribuição Por Sexo</a></li>
+        <li class="w3-ul w3-hoverable"><a href="/desporto">Distribuição Por Desporto</a></li>
+        <li class="w3-ul w3-hoverable"><a href="/profissoes">Top 10 Profissões</a></li>
      </ol>
    
 
@@ -51,9 +46,9 @@ exports.genListaPage = function(lista){
     <!DOCTYPE html>
         <html>
     <head>
-        <title>Aula3</title>
+        <title>TPC3</title>
         <meta charset = "utf-8"/>
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/> 
+        <link rel="stylesheet" href="w3.css"/> 
     </head>
     <body>
         <div class="w3-card-4">
@@ -202,7 +197,7 @@ exports.genSexobySexPage = function(lista){
     <head>
         <title>Sexo</title>
         <meta charset = "utf-8"/>
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="w3.css">
     </head>
     <body>
         <div class="w3-card-4">
@@ -355,7 +350,7 @@ exports.genProfissoesPage = function(lista){
     <!DOCTYPE html>
         <html>
     <head>
-        <title>Profissoes</title>
+        <title>Profissões</title>
         <meta charset = "utf-8"/>
         <link rel="stylesheet" href="w3.css"/> 
     </head>
@@ -363,7 +358,7 @@ exports.genProfissoesPage = function(lista){
         <div class="w3-card-4">
 
         <header class="w3-container w3-teal">
-      <h1>Lista de Profissoes na Base de Dados</h1>
+      <h1>Lista de Profissões na Base de Dados</h1>
     </header>
     
     <a href = "/">[Voltar ao Inicio]</a>
@@ -373,7 +368,7 @@ exports.genProfissoesPage = function(lista){
                             <table class="w3-table-all">
                                 <tr>
                                     <th>Rank</th>
-                                    <th>Profissao</th>
+                                    <th>Profissão</th>
                                     <th>Número de Pessoas</th>
                                 </tr>
 
@@ -526,7 +521,7 @@ exports.genPessoaPage = function(pessoa){
                     pagHTML += `<th>Sim</th>`
                 }
                 else if(pessoa.atributos[key] === false){
-                    pagHTML += `<th>Nao</th>`
+                    pagHTML += `<th>Não</th>`
                 }
                 else {
                     pagHTML += `<th>${pessoa.atributos[key]}</th>`

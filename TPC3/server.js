@@ -8,7 +8,6 @@ var mypages = require('./genPages')
 var serverS = http.createServer(function(req,res){
     var d = new Date().toISOString().substring(0,16)
     console.log(req.method + " " + req.url + " " + d)
-
     /*
     Como atualmente o nosso servidor apenas permite o acesso de informacao, nao precisamos de fazer
     req.method == "GET", ja que e` o unico metodo definido
@@ -17,6 +16,19 @@ var serverS = http.createServer(function(req,res){
         res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'})
         res.write(mypages.genMainPage())
         res.end()
+    }
+    else if(/\/w3.css$/.test(req.url)){ // para mandarmos o css necessario 
+        fs.readFile('w3.css', function(err,data){
+            res.writeHead(200,{'Content-Type':'text/css; charset=utf-8'})
+            if(err){
+                res.write("Erro na leitura do ficheiro: " + err)
+            }
+            else{
+                res.write(data)
+            }
+        
+            res.end()
+           })
     }
     else if (req.url == '/lista'){
         axios.get('http://localhost:3000/pessoas')
@@ -169,19 +181,6 @@ var serverS = http.createServer(function(req,res){
             }) 
     }
     
-    else if(req.url.match(/w3\.css/)){ // para mandarmos o css necessario 
-        fs.readFile('w3.css', function(err,data){
-            res.writeHead(200,{'Content-Type':'text/css; charset=utf-8'})
-            if(err){
-                res.write("Erro na leitura do ficheiro: " + err)
-            }
-            else{
-                res.write(data)
-            }
-        
-            res.end()
-           })
-    }
     else if(req.url.match(/p\d+/)){ 
         axios.get('http://localhost:3000/pessoas/' + req.url.substring(9)) // contamos caracters a partir de /
         .then(function(resp){ 
