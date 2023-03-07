@@ -36,12 +36,12 @@
 
 <h3>Resolucao</h3>
 
-<p><i>Disclaimer</i>: erros gramaticais devido a problemas no teclado</p>
+<p>A resolução dos dois primeiros items foi uma utilização direta do aprendido na aula prática e teórica. Optei por usar o método sort do <i>Javascript</i> em vez do pedido ao servidor, porque eram uma maneira de aprender melhor a programar em <i>Javascript</i>.</p>
 
-<p>A resolucao dos dois primeiros items foi uma utilizacao direta do aprendido na aula pratica e teorica. Optei por usar o metodo sort do js em vez do pedido ao servidor, porque eram uma maneira de aprender melhor a programar em JS.</p>
+<p>Relativamente aos pontos 3 e 4 são quase a mesma resolução, apenas muda o parâmetro da resolução. Na parte de gerar a pagina, crio um dicionario com as varias entradas. Percorro os dados todos e adiciono um ao valor que corresponde à chave daquele parâmetro. De seguida dou sort pelo número de vezes, assim fica mais facil percorrer a lista.</p>
 
-<p>Relativamente aos pontos 3 e 4 sao quase a mesma resolucao, apenas muda o parametro da resolucao. Na parte de gerar a pagina, crio um dicionario com as varias entradas. Percorro os dados todos e adiciono um ao valor que corresponde a chave daquele parametro. De seguida dou sort pelo numero de vezes, assim fica mais facil percorrer a lista.</p>
+<p>No ultimo ponto, a estrutura é a mesma dos 2 anteriores, mas limita-se a apresentacao das 10 keys do dicionario com maior valor (maior value).</p>
 
-<p>No ultimo ponto, a estrutura e` a mesma dos 2 anteriores, mas limita-se a apresentacao das 10 keys do dicionario com maior valor.</p>
+<p>EXTRA: Testei com o dataset maior (20000 entradas) e a performance diminui. A otimização para melhorar isto podia ser principal relativa ao percorrer 2 vezes uma mesma estrutura, quando so precisava de ser uma. Era algo que precisava de passar mais tempo a raciocinar.</p>
 
-<p>EXTRA: Testei com o dataset maior (20000 entradas) e a performance diminui. A otimizacao para melhorar isto podia ser principal relativa ao percorrer 2 vezes uma mesma estrutura, quando so precisava de ser uma. Era algo que precisava de passar mais tempo a raciocinar. E` tambem de notar que isto prova que json talvez nao seja a melhor maneira para guardar dados, algo que (talvez) servira de ponto de partida a proxima aula (mongoDB).</p>
+<p>Relativamente à comunicação entre </p>
