@@ -34,7 +34,7 @@
                 16000 pessoas. Os resultados serão mais interessantes.
               </li>
 
-<h3>Resolucao</h3>
+<h3>Resolução</h3>
 
 <p>A resolução dos dois primeiros items foi uma utilização direta do aprendido na aula prática e teórica. Optei por usar o método sort do <i>Javascript</i> em vez do pedido ao servidor, porque eram uma maneira de aprender melhor a programar em <i>Javascript</i>.</p>
 
@@ -44,4 +44,14 @@
 
 <p>EXTRA: Testei com o dataset maior (20000 entradas) e a performance diminui. A otimização para melhorar isto podia ser principal relativa ao percorrer 2 vezes uma mesma estrutura, quando so precisava de ser uma. Era algo que precisava de passar mais tempo a raciocinar.</p>
 
-<p>Relativamente à comunicação entre </p>
+<p>Relativamente aos ficheiros. Tenho um ficheiro <i>genPages.js</i> que está encarregue de gerar as páginas html pedidas. Cada função gera uma das páginas pedidas, sendo que todas (exceto a de gerar a página principal que não precisa) recebem a lista de pessoas do <i>json-server</i> e trabalham sobre ela. No caso de ser um sexo especifico, esta lista é apenas de pessoas sexo especificado, já que o pedido ao <i>json-server</i> é feito só para pessoas desse sexo. </p>
+<p>O ficheiro <i>server.js</i> é o servidor que depois se arranca com o node. Lá está descrito todo o tratamento que é feito ao url consoante as diferentes alineas do exercício do TPC3.</p>
+
+<h3>Para executar o programa é preciso:</h3>
+<ol>
+            <li><code>json-server --watch NOMEDODATASET.json</code></li>
+            <li><code>node server.js</code></li>
+</ol>
+
+
+<!-- é ç ã õ é à á -->
