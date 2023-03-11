@@ -37,15 +37,15 @@ var tpc4server = http.createServer(function (req, res) {
     else{
         switch(req.method){
             case "GET": 
-                // GET /registar/user
+
 
                 if (req.url == "/"){
                     res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                    res.write("<h1>TESTE</h1>")
+                    res.write(templates.mainPage(d))
                     res.end()
                 }
-
-                else if((req.url == "/registar/user") ){
+                // GET /register/user
+                else if((req.url == "/register/user") ){
                      res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
                      res.write(templates.formPage(d))
                      //res.write("<h1>TESTE</h1>")
