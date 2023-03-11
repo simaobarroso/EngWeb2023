@@ -24,7 +24,7 @@ exports.sucessPage = function(mode,data) {
 
 }
 
-exports.mainPage = function(d){
+exports.mainPage = function(d,users,tasks){
     pagHTML = `<!DOCTYPE html>
     <html>
         <head>
@@ -33,40 +33,80 @@ exports.mainPage = function(d){
             <link rel="stylesheet" href="w3.css"/>
             <title>Main Page</title>
         </head>
-        <body>`
+        `
     
     //https://www.w3schools.com/w3css/w3css_layout.asp
 
 
+    // Fazer a cena do tasker um drop down bar??
+    // FORMA DE GUARDAR A DATA? TEXT???????????????????????????????????
     // Form introducao de dados
     pagHTML +=`
-   
-    <div class="w3-container w3-blue">
-    <p>Hello W3.CSS Layout.</p>
+    </head>
+    <body>
+        <div class="w3-card-4">
+            <header class="w3-container w3-pale-blue">
+                <h2>TO-DO app!</h2>
+        </header>
+
+    <div class="w3-container w3-padding-32">
+    <form class="w3-container" method="POST">
+    <fieldset>
+        <legend>Register To-do!</legend>
+        <label>Due Date</label>
+        <input class="w3-input w3-round" type="text" name="due_date"/>
+        <label>Who</label>
+        <input class="w3-input w3-round" type="text" name="who"/>
+        <label>What Task</label>
+        <input class="w3-input w3-round" type="text" name="what_task"/>
+    </fieldset>
+    <br/>
+    <button class="w3-btn w3-pale-green w3-mb-2" type="submit">Submit!</button>
+    </form>
+    <form action="/register/user" method="get">
+        <button class="w3-btn w3-pale-green w3-mb-2" type="button" onclick="location.href='/register/user';">AddTasker</button>
+    </form>
+    <hr>
+
     </div>    
-    </div>
     `
+    // confirmar se o user existe ou nao!!! + Mudar localizao butoes e cenas assim
+
 
     // lista de tarefas a realizar
     pagHTML +=`
     <div class="w3-cell-row" style="width:100%">
-        <div class="w3-container w3-red w3-cell">
-            <p>Hello W3.CSS Layout.</p>
-        </div>
-
-
+        <div class="w3-container  w3-cell">
+        <ul>
     `
-
-    // lista de tarefas realizadas
+          // CSS 
+    for(let i = 0; i<tasks.length;i++){
+        if(tasks[i].done == 0){
+                pagHTML += `<li>${tasks[i].what_task} - ${tasks[i].due_date} - ${tasks[i].who} </li>`
+                // falta adicionar aqui butao de done e edit !!! 
+        }
+    }    
     pagHTML +=`
-    <div class="w3-container w3-green w3-cell">
-        <p>Hello W3.CSS Layout.</p>
+    </ul>
+    </div>
+    <div class="w3-container w3-cell">
+    `
+    
+    // lista de tarefas realizadas
+    for(let i = 0; i< tasks.length;i++){
+        if(tasks[i].done == 1){
+            pagHTML += `<li>${tasks[i].what_task} - ${tasks[i].due_date} - ${tasks[i].who} </li>`
+            // falta adicionar aqui butao de done e edit !!! 
+    }
+    }
+    
+    pagHTML+=`    
     </div>
     </div>
     `
 
     pagHTML += `
-    <footer class="w3-container w3-teal">
+    <footer class="w3-container w3-pale-blue">
         <h5>TPC4 EW SIMAO BARROSO ${d} - [<a href="/">Return</a>]</h5>
     </footer>
     </body>

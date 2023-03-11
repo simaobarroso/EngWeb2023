@@ -40,9 +40,29 @@ var tpc4server = http.createServer(function (req, res) {
 
 
                 if (req.url == "/"){
-                    res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                    res.write(templates.mainPage(d))
-                    res.end()
+                    axios.get("http://localhost:3000/users/" )
+                    .then(response =>{
+                            var users = response.data
+                            // outra maneira : https://www.storyblok.com/tp/how-to-send-multiple-requests-using-axios
+                            axios.get("http://localhost:3000/tasks/")
+                                .then(response =>{
+                                var tasks = response.data
+                                res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+                                res.write(templates.mainPage(d,users,tasks))
+                                res.end()
+                        })
+                        .catch(function(erro){
+                            res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+                            res.write(`<p> TASKS ERROR JSON-SERVER! ... Erro:   ` + erro)
+                            res.end()
+                        })
+                    })
+                    .catch(function(erro){
+                        res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+                        res.write(`<p> USERS ERROR JSON-SERVER!... ErroE:   ` + erro)
+                        res.end()
+                    })
+                    
                 }
                 // GET /register/user
                 else if((req.url == "/register/user") ){
