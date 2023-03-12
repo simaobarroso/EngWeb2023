@@ -8,4 +8,5 @@
 <li>Fazer botao edit + done</li>
 <li>limpar css + codigo melhor</li>
 <li>escrever readme</li>
+<li>TPC TEORICA </li>
 </ul>
