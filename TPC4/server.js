@@ -8,6 +8,7 @@ var templates = require('./genPags')
 var static = require('./static.js')
 const { parse } = require('querystring');
 
+var lenTasks; // rever maneira melhor de fazer isto
 
 //aux Functions
 function collectRequestBodyData(request, callback) {
@@ -47,6 +48,7 @@ var tpc4server = http.createServer(function (req, res) {
                             axios.get("http://localhost:3000/tasks/")
                                 .then(response =>{
                                 var tasks = response.data
+                                lenTasks = response.data.length
                                 res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
                                 res.write(templates.mainPage(d,users,tasks))
                                 res.end()
@@ -145,7 +147,9 @@ var tpc4server = http.createServer(function (req, res) {
                 }
                 break
                 */
-               
+
+                /* Regex para ir buscar cada individual task e apresentar la???
+               */
                 case "POST":
                     if(req.url == '/register/user'){
                         collectRequestBodyData(req, result => {
@@ -170,15 +174,20 @@ var tpc4server = http.createServer(function (req, res) {
                             }
                         });
                     }
-                    /*
+                    
                     if(req.url == '/'){
                         collectRequestBodyData(req, result => {
                             if(result){
-                                console.log(result)
-                                axios.put('http://localhost:3000/tasks/'+ result.id, result)
+                                axios.post('http://localhost:3000/tasks/', { // put vs post
+                                    "id" : lenTasks+1, // PROBLEMA COM ISTO TEMOS DE IR A PAGINA INICIAL SEMPRE ANTES DE SUBMETER UM PEDIDO !!!!
+                                    "due_date": result.due_date,
+                                    "who" : result.who,
+                                    "what_task": result.what_task,
+                                    "done" : 0
+                                })
                                         .then(resp => {
                                             res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
-                                            res.write('<p>Update: ' + JSON.stringify(result) +'</p>')
+                                            res.write(templates.sucessPage(d))//'<p>Update: ' + JSON.stringify(result) +'</p>')
                                             res.end()
                                         }).catch(error => {
                                             console.log('Erro: ' + error);
@@ -191,7 +200,7 @@ var tpc4server = http.createServer(function (req, res) {
                             }
                         });
                     }
-                    */
+                    /**/
                     else{
                         res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
                         res.write('<p>Unsupported POST request: ' + req.url + '</p>')
@@ -199,8 +208,10 @@ var tpc4server = http.createServer(function (req, res) {
                         res.end()
                     }
                     break
-                        
-                  
+                
+                case "PUT":
+                    // PARA O CASO DO BOTAO EDIT E DONE        
+                break
                 default: 
                     res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
                     res.write("<p>" + req.method + " unsupported in this server.</p>")
