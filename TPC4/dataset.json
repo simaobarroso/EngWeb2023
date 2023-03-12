@@ -1,5 +1,18 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": 1,
+      "name": "EngWeb"
+    },
+    {
+      "id": "96834",
+      "name": "Simao Barroso"
+    },
+    {
+      "id": "2",
+      "name": "jcr"
+    }
+  ],
   "tasks": [
     {
       "due_date": "Mar 15",

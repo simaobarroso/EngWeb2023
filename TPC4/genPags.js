@@ -4,7 +4,7 @@
 
 
 // Sera necessaria esta pagina?? rever post
-exports.sucessPage = function(mode,data) {
+exports.sucessPage = function(d) { //function(mode,data)
     return `
     <!DOCTYPE html>
     <html>
@@ -84,7 +84,9 @@ exports.mainPage = function(d,users,tasks){
         if(tasks[i].done == 0){
                 pagHTML += `<li>${tasks[i].what_task} - ${tasks[i].due_date} - ${tasks[i].who} </li>`
                 // falta adicionar aqui butao de done e edit !!! 
-        }
+                // Botao de edit e done vaao ser um put (da para modificar)
+                // diferenca e que o done e automatico
+            }
     }    
     pagHTML +=`
     </ul>

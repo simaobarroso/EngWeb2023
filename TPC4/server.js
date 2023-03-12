@@ -150,11 +150,14 @@ var tpc4server = http.createServer(function (req, res) {
                     if(req.url == '/register/user'){
                         collectRequestBodyData(req, result => {
                             if(result){
-                                console.log(result)
-                                axios.put('http://localhost:3000/users/'+ result.id, result)
+                                console.log('http://localhost:3000/users/'+ result.id)
+                                axios.post('http://localhost:3000/users/', {
+                                    "id": result.id,
+                                    "name" : result.name
+                                })
                                         .then(resp => {
                                             res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
-                                            res.write(templates.sucessPage(d))
+                                            res.write(templates.sucessPage(d)) //falta o mode
                                             res.end()
                                         }).catch(error => {
                                             console.log('Erro: ' + error);
