@@ -145,17 +145,34 @@ var tpc4server = http.createServer(function (req, res) {
                 }
                 break
                 */
-               /*
+               
                 case "POST":
-                    if(req.url == '/alunos/registo'){
-                        res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                        // res.write(studentFormPage(d))
-                        res.end('<p>Yet to be done... </p>')
-                    }
-                    else if(/\/alunos\/edit\/(A|PG)[0-9]+$/i.test(req.url)){
+                    if(req.url == '/register/user'){
                         collectRequestBodyData(req, result => {
                             if(result){
-                                axios.put('http://localhost:3000/alunos/'+ result.id, result)
+                                console.log(result)
+                                axios.put('http://localhost:3000/users/'+ result.id, result)
+                                        .then(resp => {
+                                            res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
+                                            res.write(templates.sucessPage(d))
+                                            res.end()
+                                        }).catch(error => {
+                                            console.log('Erro: ' + error);
+                                        })
+                            }
+                            else{
+                                res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
+                                res.write("<p>Unable to collect data from body...</p>")
+                                res.end()
+                            }
+                        });
+                    }
+                    /*
+                    if(req.url == '/'){
+                        collectRequestBodyData(req, result => {
+                            if(result){
+                                console.log(result)
+                                axios.put('http://localhost:3000/tasks/'+ result.id, result)
                                         .then(resp => {
                                             res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
                                             res.write('<p>Update: ' + JSON.stringify(result) +'</p>')
@@ -171,6 +188,7 @@ var tpc4server = http.createServer(function (req, res) {
                             }
                         });
                     }
+                    */
                     else{
                         res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
                         res.write('<p>Unsupported POST request: ' + req.url + '</p>')
@@ -178,7 +196,8 @@ var tpc4server = http.createServer(function (req, res) {
                         res.end()
                     }
                     break
-                    */
+                        
+                  
                 default: 
                     res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
                     res.write("<p>" + req.method + " unsupported in this server.</p>")
@@ -188,7 +207,7 @@ var tpc4server = http.createServer(function (req, res) {
         
     })
     
-tpc4server.listen(5555, ()=>{
-        console.log("Servidor à escuta na porta 5555...")
+tpc4server.listen(7777, ()=>{
+        console.log("Servidor à escuta na porta 7777...")
 })
     

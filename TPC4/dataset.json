@@ -1,29 +1,29 @@
 {
-    "users":[],
-    "tasks":[
-        {
-            "due_date": "Mar 15", 
-            "who":"Simao Barroso",
-            "what_task": "Festa de anos",
-            "done": 0
-        },
-        {
-            "due_date": "Apr 25", 
-            "who":"Presidente Republica",
-            "what_task": "Discurso 25 abril",
-            "done": 0
-        },
-        {
-            "due_date": "July 20", 
-            "who":"JCR",
-            "what_task": "20 a EW",
-            "done": 0
-        },
-        {
-            "due_date": "Jan 2", 
-            "who":"Alunos Lei",
-            "what_task": "Teste de SD",
-            "done": 1
-        }
-    ]
+  "users": [],
+  "tasks": [
+    {
+      "due_date": "Mar 15",
+      "who": "Simao Barroso",
+      "what_task": "Festa de anos",
+      "done": 0
+    },
+    {
+      "due_date": "Apr 25",
+      "who": "Presidente Republica",
+      "what_task": "Discurso 25 abril",
+      "done": 0
+    },
+    {
+      "due_date": "July 20",
+      "who": "JCR",
+      "what_task": "20 a EW",
+      "done": 0
+    },
+    {
+      "due_date": "Jan 2",
+      "who": "Alunos Lei",
+      "what_task": "Teste de SD",
+      "done": 1
+    }
+  ]
 }
