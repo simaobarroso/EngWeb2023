@@ -44,10 +44,10 @@
     },
     {
       "id": 5,
-      "due_date": "31 dez",
+      "due_date": "2 jan",
       "who": "Simao Barroso",
       "what_task": "Escolher Mestrado",
-      "done": 0
+      "done": "0"
     }
   ]
 }

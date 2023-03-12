@@ -24,6 +24,8 @@ exports.sucessPage = function(d) { //function(mode,data)
 
 }
 
+
+
 exports.mainPage = function(d,users,tasks){
     pagHTML = `<!DOCTYPE html>
     <html>
@@ -82,7 +84,7 @@ exports.mainPage = function(d,users,tasks){
           // CSS 
     for(let i = 0; i<tasks.length;i++){
         if(tasks[i].done == 0){
-                pagHTML += `<li>${tasks[i].what_task} - ${tasks[i].due_date} - ${tasks[i].who} </li>`
+                pagHTML += `<li>${tasks[i].what_task} - ${tasks[i].due_date} - ${tasks[i].who}  <-> <a href = "tasks/edit/${tasks[i].id}">[EDIT]</a> <-> <a href="/" onClick="tasks[i].done = 1"> [DONE]</a> </li>`
                 // falta adicionar aqui butao de done e edit !!! 
                 // Botao de edit e done vaao ser um put (da para modificar)
                 // diferenca e que o done e automatico
@@ -142,6 +144,50 @@ exports.formPage= function(d){
                     </fieldset>
                     <br/>
                     <button class="w3-btn w3-pale-green w3-mb-2" type="submit">Register!</button>
+                </form>
+
+                <footer class="w3-container w3-pale-blue">
+                    <h5>TPC4 EW SIMAO BARROSO ${d} - [<a href="/">Return</a>]</h5>
+                </footer>
+            
+            </div>
+            </body>
+            </html>
+    `
+}
+
+
+exports.editPageTasks = function(a, d){
+    return`<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8"/>
+            <link rel="icon" href="favicon.png"/>
+            <link rel="stylesheet" href="w3.css"/>
+            <title>Task : ${a.id}</title>
+        </head>
+        <body>
+            <div class="w3-card-4">
+                <header class="w3-container w3-pale-blue">
+                    <h2>Edit Task ${a.id}!</h2>
+                </header>
+            
+                <form class="w3-container" method="POST">
+                    <fieldset>
+                    <legend>Metadata</legend>
+                    <label>Id</label>
+                    <input class="w3-input w3-round" type="text" name="id" readonly value="${a.id}" = />
+                    <label>due_date</label>
+                    <input class="w3-input w3-round" type="text" name="due_date" value="${a.due_date}"/>
+                    <label>who</label>
+                    <input class="w3-input w3-round" type="text" name="who" value="${a.who}"/>
+                    <label>what_task</label>
+                    <input class="w3-input w3-round" type="text" name="what_task" value="${a.what_task}"/>
+                    <label>Done? (1 - yes / 0 - no)</label>
+                    <input class="w3-input w3-round" type="number" name="done" value="${a.done}"/>
+                    </fieldset>
+                    <br/>
+                    <button class="w3-btn w3-pale-green w3-mb-2" type="submit">Edit!</button>
                 </form>
 
                 <footer class="w3-container w3-pale-blue">

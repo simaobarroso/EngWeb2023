@@ -73,7 +73,7 @@ var tpc4server = http.createServer(function (req, res) {
                      //res.write("<h1>TESTE</h1>")
                      res.end()
                 }
-                    break
+                    
                  /*
                 // GET / --------------------------------------------------------------------
                 if((req.url == "/") ){
@@ -91,18 +91,23 @@ var tpc4server = http.createServer(function (req, res) {
                             res.end()
                         })
                 }
-               
-                // GET /alunos/:id --------------------------------------------------------------------
-                else if(/\/alunos\/(A|PG)[0-9]+$/i.test(req.url)){
-                    var idAluno = req.url.split("/")[2]
-                    axios.get("http://localhost:3000/alunos/" + idAluno)
+               */
+                // GET /tasks/edit/:id --------------------------------------------------------------------
+                else if(/\/tasks\/edit\/[0-9]+$/.test(req.url)){
+                    var taskId = req.url.split("/")[3]
+                    console.log(taskId)
+                    axios.get("http://localhost:3000/tasks/" + taskId)
                         .then( response => {
                             let a = response.data
-                            // Add code to render page with the student record
                             res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                            res.end(templates.studentPage(a, d))
+                            res.end(templates.editPageTasks(a, d))
+                        })
+                        .catch(error => {
+                            console.log('Erro: ' + error);
                         })
                 }
+                
+                /*
                 // GET /alunos/registo --------------------------------------------------------------------
                 else if(req.url == "/alunos/registo"){
                     // Add code to render page with the student form
@@ -139,14 +144,14 @@ var tpc4server = http.createServer(function (req, res) {
                         }).catch(error => {
                                 console.log('Erro: ' + error);
                             })
-                }      
+                }  */    
                 else{
                     res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
                     res.write("<p>" + req.method + " " + req.url + " unsupported on this server.</p>")
                     res.end()
                 }
                 break
-                */
+                
 
                 /* Regex para ir buscar cada individual task e apresentar la???
                */
@@ -175,7 +180,7 @@ var tpc4server = http.createServer(function (req, res) {
                         });
                     }
                     
-                    if(req.url == '/'){
+                    else if(req.url == '/'){
                         collectRequestBodyData(req, result => {
                             if(result){
                                 axios.post('http://localhost:3000/tasks/', { // put vs post
@@ -200,17 +205,44 @@ var tpc4server = http.createServer(function (req, res) {
                             }
                         });
                     }
-                    /**/
+                    /*
                     else{
                         res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
                         res.write('<p>Unsupported POST request: ' + req.url + '</p>')
                         res.write('<p><a href="/">Return</a></p>')
                         res.end()
                     }
-                    break
-                
-                case "PUT":
-                    // PARA O CASO DO BOTAO EDIT E DONE        
+                   // break
+                */
+                //case "PUT": // REVER HTML PUT
+                    // PARA O CASO DO BOTAO EDIT E DONE    + edit     
+                else if(/\/tasks\/edit\/[0-9]+$/.test(req.url)){
+                    var taskId = req.url.split("/")[3]
+                        collectRequestBodyData(req, result => {
+                            if(result){
+                                axios.put('http://localhost:3000/tasks/' + taskId, result)
+                                        .then(resp => {
+                                            res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
+                                            res.write(templates.sucessPage(d))//'<p>Update: ' + JSON.stringify(result) +'</p>')
+                                            res.end()
+                                        }).catch(error => {
+                                            console.log('Erro: ' + error);
+                                        })
+                            }
+                            else{
+                                res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
+                                res.write("<p>Unable to collect data from body...</p>")
+                                res.end()
+                            }
+                        });
+                    }
+
+                    else{
+                        res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+                        res.write('<p>Unsupported POST request: ' + req.url + '</p>')
+                        res.write('<p><a href="/">Return</a></p>')
+                        res.end()
+                    }    
                 break
                 default: 
                     res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
