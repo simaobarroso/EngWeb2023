@@ -3,7 +3,19 @@
     {
       "id": "1",
       "name": "Simao Barroso"
+    },
+    {
+      "id": "2",
+      "name": "jcr"
     }
   ],
-  "tasks": []
+  "tasks": [
+    {
+      "id": 1,
+      "due_date": "2024-01-01",
+      "who": "Simao Barroso",
+      "what_task": "Escolher Mestrado",
+      "done": 0
+    }
+  ]
 }
