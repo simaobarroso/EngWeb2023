@@ -14,11 +14,21 @@ function staticResource(request,resource){
             return true;
         }
     }
-    */
+    
     return /\/w3.css$/.test(request.url) || 
             /\/favicon.png$/.test(request.url) ||
             /\/student.png$/.test(request.url)
-
+    */
+            var files = fs.readdirSync('./public/');
+            var bool = false
+            files.forEach(file => {
+                let pattern = new RegExp(file)
+                
+                if(pattern.test(request.url)) bool = true
+            })
+        
+            
+            return bool
 
 }
 
