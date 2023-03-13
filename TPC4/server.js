@@ -38,34 +38,33 @@ var tpc4server = http.createServer(function (req, res) {
     else{
         switch(req.method){
             case "GET": 
-
-
-                if (req.url == "/"){
-                    axios.get("http://localhost:3000/users/" )
+                if(/\/done\/[0-9]+$/.test(req.url)){
+                    var taskId = req.url.split("/")[2]
+                    console.log(taskId)
+                 axios.get("http://localhost:3000/tasks/"+ taskId )
                     .then(response =>{
-                            var users = response.data
-                            // outra maneira : https://www.storyblok.com/tp/how-to-send-multiple-requests-using-axios
-                            axios.get("http://localhost:3000/tasks?_sort=due_date")
-                                .then(response =>{
-                                var tasks = response.data
-                                lenTasks = response.data.length
-                                res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                                res.write(templates.mainPage(d,users,tasks))
-                                res.end()
+                    aux = response.data
+                    axios.put("http://localhost:3000/tasks/"+ taskId, { 
+                            "id" : aux.id,
+                            "due_date": aux.due_date,
+                            "who" : aux.who,
+                            "what_task": aux.what_task,
+                            "done" : 1
                         })
-                        .catch(function(erro){
-                            res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                            res.write(`<p> TASKS ERROR JSON-SERVER! ... Erro:   ` + erro)
-                            res.end()
+                        .then(resp => {
+
+                            res.writeHead(301, {Location: 'http://localhost:7777/'});
+                            res.end();
+                          
+
+                        }).catch(error => {
+                            console.log('Erro: ' + error);
                         })
-                    })
-                    .catch(function(erro){
-                        res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                        res.write(`<p> USERS ERROR JSON-SERVER!... ErroE:   ` + erro)
-                        res.end()
-                    })
-                    
-                }
+                        
+                })  
+               
+            }
+
                 // GET /register/user
                 else if((req.url == "/register/user") ){
                     axios.get("http://localhost:3000/users/" )
@@ -99,28 +98,31 @@ var tpc4server = http.createServer(function (req, res) {
                         })
                 }
 
-                else if(/\/dones\/[0-9]+$/.test(req.url)){
-                    var taskId = req.url.split("/")[2]
-                    console.log(taskId)
-                    axios.get("http://localhost:3000/tasks/"+ taskId )
+                else if (req.url == "/"){
+                    axios.get("http://localhost:3000/users/" )
                     .then(response =>{
-                        console.log(response)
-                        axios.put('http://localhost:3000/tasks/' + taskId, { 
-                                "id" : response.id,
-                                "due_date": response.due_date,
-                                "who" : response.who,
-                                "what_task": response.what_task,
-                                "done" : 1
-                            })
-                            .then(resp => {
-                                res.writeHead(301, {Location: 'http://localhost:7777/'});
-                                res.end();
-
-                            }).catch(error => {
-                                console.log('Erro: ' + error);
-                            })
-                    })  
-                   
+                            var users = response.data
+                            // outra maneira : https://www.storyblok.com/tp/how-to-send-multiple-requests-using-axios
+                            axios.get("http://localhost:3000/tasks?_sort=due_date")
+                                .then(response =>{
+                                var tasks = response.data
+                                lenTasks = response.data.length
+                                res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+                                res.write(templates.mainPage(d,users,tasks))
+                                res.end()
+                        })
+                        .catch(function(erro){
+                            res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+                            res.write(`<p> TASKS ERROR JSON-SERVER! ... Erro:   ` + erro)
+                            res.end()
+                        })
+                    })
+                    .catch(function(erro){
+                        res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+                        res.write(`<p> USERS ERROR JSON-SERVER!... ErroE:   ` + erro)
+                        res.end()
+                    })
+                    
                 }
                 /*
                 // GET /alunos/registo --------------------------------------------------------------------

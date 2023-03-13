@@ -99,7 +99,7 @@ exports.mainPage = function(d,users,tasks){
         if(tasks[i].done == 0){
                 pagHTML += `<li>${tasks[i].what_task} - ${tasks[i].due_date} - ${tasks[i].who} 
                 <a href = "tasks/edit/${tasks[i].id}">[EDIT]</a>
-                <a href = "dones/${tasks[i].id}">[DONE]</a> 
+                <a href = "done/${tasks[i].id}">[DONE]</a> 
                 </li>`
                 // falta adicionar aqui butao de done e edit !!! 
                 // Botao de edit e done vaao ser um put (da para modificar)
