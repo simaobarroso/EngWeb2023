@@ -1,8 +1,3 @@
-// Aqui vao ser precisas ser geradas duas paginas, 
-// uma que e` a pagina principal, seguindo a estrutura dita na aula
-// uma de criar um utilizador
-
-
 // Sera necessaria esta pagina?? rever post
 exports.sucessPage = function(d) { //function(mode,data)
     return `
@@ -56,10 +51,20 @@ exports.mainPage = function(d,users,tasks){
     <fieldset>
         <legend>Register To-do!</legend>
         <label>Due Date</label>
-        <input class="w3-input w3-round" type="text" name="due_date"/>
+        <input class="w3-input w3-round" type="date" name="due_date"/>
         <label>Who</label>
-        <input class="w3-input w3-round" type="text" name="who"/>
-        <label>What Task</label>
+        <select class="w3-select w3-round" name="who"/>
+        <option value="" disabled select>Choose a person...</option>`
+
+        for(let j = 0; j<users.length;j++){
+            pagHTML+= `
+            <option class="w3-center">${users[j].name}</option>
+            `
+        }
+
+
+
+       pagHTML+=` <label>What Task</label>
         <input class="w3-input w3-round" type="text" name="what_task"/>
     </fieldset>
     <br/>
@@ -92,8 +97,10 @@ exports.mainPage = function(d,users,tasks){
           // CSS 
     for(let i = 0; i<tasks.length;i++){
         if(tasks[i].done == 0){
-                pagHTML += `<li>${tasks[i].what_task} - ${tasks[i].due_date} - ${tasks[i].who}  <-> <a href = "tasks/edit/${tasks[i].id}">[EDIT]</a> <-> 
-                <a href="/"> <form class="w3-container" action="/done/${tasks[i].id}" method="POST"> <button type=submit>[DONE]</button></a> </form></li>`
+                pagHTML += `<li>${tasks[i].what_task} - ${tasks[i].due_date} - ${tasks[i].who} 
+                <a href = "tasks/edit/${tasks[i].id}">[EDIT]</a>
+                <a href = "dones/${tasks[i].id}">[DONE]</a> 
+                </li>`
                 // falta adicionar aqui butao de done e edit !!! 
                 // Botao de edit e done vaao ser um put (da para modificar)
                 // diferenca e que o done e automatico
@@ -128,7 +135,7 @@ exports.mainPage = function(d,users,tasks){
     return pagHTML
 }
 
-exports.formPage= function(d){
+exports.formPage= function(d,id){
     return `<!DOCTYPE html>
     <html>
         <head>
@@ -147,7 +154,7 @@ exports.formPage= function(d){
                     <fieldset>
                         <legend>Metadata</legend>
                         <label>Id</label>
-                        <input class="w3-input w3-round" type="text" name="id"/>
+                        <input class="w3-input w3-round" type="text" readonly value="${id}" name="id"/>
                         <label>Name</label>
                         <input class="w3-input w3-round" type="text" name="name"/>
                     </fieldset>
@@ -187,7 +194,7 @@ exports.editPageTasks = function(a, d){
                     <label>Id</label>
                     <input class="w3-input w3-round" type="text" name="id" readonly value="${a.id}" = />
                     <label>due_date</label>
-                    <input class="w3-input w3-round" type="text" name="due_date" value="${a.due_date}"/>
+                    <input class="w3-input w3-round" type="date" name="due_date" value="${a.due_date}"/>
                     <label>who</label>
                     <input class="w3-input w3-round" type="text" name="who" value="${a.who}"/>
                     <label>what_task</label>

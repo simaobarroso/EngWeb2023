@@ -1,24 +1,16 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "EngWeb"
-    },
-    {
-      "id": "96834",
+      "id": "1",
       "name": "Simao Barroso"
-    },
-    {
-      "id": "2",
-      "name": "jcr"
     }
   ],
   "tasks": [
     {
-      "id": 4,
-      "due_date": "Jan 2",
-      "who": "Alunos Lei",
-      "what_task": "Teste de SD",
+      "id": 1,
+      "due_date": "0051-12-15",
+      "who": "Simao Barroso",
+      "what_task": "asdas",
       "done": 0
     }
   ]

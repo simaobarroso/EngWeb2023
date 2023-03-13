@@ -45,7 +45,7 @@ var tpc4server = http.createServer(function (req, res) {
                     .then(response =>{
                             var users = response.data
                             // outra maneira : https://www.storyblok.com/tp/how-to-send-multiple-requests-using-axios
-                            axios.get("http://localhost:3000/tasks/")
+                            axios.get("http://localhost:3000/tasks?_sort=due_date")
                                 .then(response =>{
                                 var tasks = response.data
                                 lenTasks = response.data.length
@@ -68,30 +68,22 @@ var tpc4server = http.createServer(function (req, res) {
                 }
                 // GET /register/user
                 else if((req.url == "/register/user") ){
-                     res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                     res.write(templates.formPage(d))
-                     //res.write("<h1>TESTE</h1>")
-                     res.end()
+                    axios.get("http://localhost:3000/users/" )
+                    .then(response =>{
+                        res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+                        let id = response.data.length +1
+                        res.write(templates.formPage(d,id))
+                        //res.write("<h1>TESTE</h1>")
+                        res.end()
+                    })
+                    .catch(function(erro){
+                        res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+                        res.write(`<p> USERS ERROR JSON-SERVER! ... Erro:   ` + erro)
+                        res.end()
+                    })
+
                 }
                     
-                 /*
-                // GET / --------------------------------------------------------------------
-                if((req.url == "/") ){
-                    axios.get("http://localhost:3000/alunos?_sort=nome")
-                        .then(response => {
-                            var alunos = response.data
-                            // Render page with the student's list
-                            res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                            res.write(templates.studentsListPage(alunos, d))
-                            res.end()
-                        })
-                        .catch(function(erro){
-                            res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                            res.write("<p>Não foi possível obter a lista de alunos... Erro: " + erro)
-                            res.end()
-                        })
-                }
-               */
                 // GET /tasks/edit/:id --------------------------------------------------------------------
                 else if(/\/tasks\/edit\/[0-9]+$/.test(req.url)){
                     var taskId = req.url.split("/")[3]
@@ -106,7 +98,30 @@ var tpc4server = http.createServer(function (req, res) {
                             console.log('Erro: ' + error);
                         })
                 }
-                
+
+                else if(/\/dones\/[0-9]+$/.test(req.url)){
+                    var taskId = req.url.split("/")[2]
+                    console.log(taskId)
+                    axios.get("http://localhost:3000/tasks/"+ taskId )
+                    .then(response =>{
+                        console.log(response)
+                        axios.put('http://localhost:3000/tasks/' + taskId, { 
+                                "id" : response.id,
+                                "due_date": response.due_date,
+                                "who" : response.who,
+                                "what_task": response.what_task,
+                                "done" : 1
+                            })
+                            .then(resp => {
+                                res.writeHead(301, {Location: 'http://localhost:7777/'});
+                                res.end();
+
+                            }).catch(error => {
+                                console.log('Erro: ' + error);
+                            })
+                    })  
+                   
+                }
                 /*
                 // GET /alunos/registo --------------------------------------------------------------------
                 else if(req.url == "/alunos/registo"){
@@ -191,8 +206,13 @@ var tpc4server = http.createServer(function (req, res) {
                                     "done" : 0
                                 })
                                         .then(resp => {
+                                            /*
                                             res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
                                             res.write(templates.sucessPage(d))//'<p>Update: ' + JSON.stringify(result) +'</p>')
+                                            res.end()
+                                            */
+                                            res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
+                                            res.write(templates.sucessPage(d)) //falta o mode
                                             res.end()
                                         }).catch(error => {
                                             console.log('Erro: ' + error);
@@ -236,38 +256,7 @@ var tpc4server = http.createServer(function (req, res) {
                             }
                         });
                     }
-                    else if(/\/done\/[0-9]+$/.test(req.url)){
-                        var taskId = req.url.split("/")[2]
-                        //console.log("asdbhashdviasudjvak")
-                        collectRequestBodyData(req, result => {
-                            if(result){
-                                console.log(result)
-                                axios.put('http://localhost:3000/tasks/' + taskId, { // put vs post
-                                    "id" : result.id, // PROBLEMA COM ISTO TEMOS DE IR A PAGINA INICIAL SEMPRE ANTES DE SUBMETER UM PEDIDO !!!!
-                                    "due_date": result.due_date,
-                                    "who" : result.who,
-                                    "what_task": result.what_task,
-                                    "done" : 1
-                                })
-                                        .then(resp => {
-                                            location.reload()
-                                            /*
-                                            res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
-                                            res.write(templates.mainPage(d))//'<p>Update: ' + JSON.stringify(result) +'</p>')
-                                            res.end()
-                                            */
-                                        }).catch(error => {
-                                            console.log('Erro: ' + error);
-                                        })
-                                        
-                            }
-                            else{
-                                res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
-                                res.write("<p>Unable to collect data from body...</p>")
-                                res.end()
-                            }
-                        });
-                    }
+
 
                     else{
                         res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
