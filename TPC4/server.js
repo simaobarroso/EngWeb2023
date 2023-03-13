@@ -65,6 +65,24 @@ var tpc4server = http.createServer(function (req, res) {
                
             }
 
+            else  if(/\/delete\/[0-9]+$/.test(req.url)){
+                var taskId = req.url.split("/")[2]
+    
+                axios.delete("http://localhost:3000/tasks/"+ taskId,)
+                    .then(resp => {
+
+                        res.writeHead(301, {Location: 'http://localhost:7777/'});
+                        res.end();
+                      
+
+                    }).catch(error => {
+                        console.log('Erro: ' + error);
+                    })
+                     
+           
+        }
+
+
                 // GET /register/user
                 else if((req.url == "/register/user") ){
                     axios.get("http://localhost:3000/users/" )

@@ -5,35 +5,5 @@
       "name": "Simao Barroso"
     }
   ],
-  "tasks": [
-    {
-      "done": 1,
-      "id": 1
-    },
-    {
-      "done": 1,
-      "id": 2
-    },
-    {
-      "id": 3,
-      "due_date": "0005-05-05",
-      "who": "Simao Barroso",
-      "what_task": "ola",
-      "done": 1
-    },
-    {
-      "id": 4,
-      "due_date": "0007-09-08",
-      "who": "Simao Barroso",
-      "what_task": "adeus",
-      "done": 1
-    },
-    {
-      "id": 5,
-      "due_date": "6565-05-05",
-      "who": "Simao Barroso",
-      "what_task": "asdasm",
-      "done": 1
-    }
-  ]
+  "tasks": []
 }

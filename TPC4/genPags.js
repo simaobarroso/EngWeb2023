@@ -100,6 +100,7 @@ exports.mainPage = function(d,users,tasks){
                 pagHTML += `<li>${tasks[i].what_task} - ${tasks[i].due_date} - ${tasks[i].who} 
                 <a href = "tasks/edit/${tasks[i].id}">[EDIT]</a>
                 <a href = "done/${tasks[i].id}">[DONE]</a> 
+                <a href = "delete/${tasks[i].id}">[DELETE]</a> 
                 </li>`
                 // falta adicionar aqui butao de done e edit !!! 
                 // Botao de edit e done vaao ser um put (da para modificar)
@@ -115,7 +116,7 @@ exports.mainPage = function(d,users,tasks){
     // lista de tarefas realizadas
     for(let i = 0; i< tasks.length;i++){
         if(tasks[i].done == 1){
-            pagHTML += `<li>${tasks[i].what_task} - ${tasks[i].due_date} - ${tasks[i].who} </li>`
+            pagHTML += `<li>${tasks[i].what_task} - ${tasks[i].due_date} - ${tasks[i].who}  - <a href = "delete/${tasks[i].id}">[DELETE]</a> </li>`
             // falta adicionar aqui butao de done e edit !!! 
     }
     }
