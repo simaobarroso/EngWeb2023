@@ -236,6 +236,38 @@ var tpc4server = http.createServer(function (req, res) {
                             }
                         });
                     }
+                    else if(/\/done\/[0-9]+$/.test(req.url)){
+                        var taskId = req.url.split("/")[2]
+                        //console.log("asdbhashdviasudjvak")
+                        collectRequestBodyData(req, result => {
+                            if(result){
+                                console.log(result)
+                                axios.put('http://localhost:3000/tasks/' + taskId, { // put vs post
+                                    "id" : result.id, // PROBLEMA COM ISTO TEMOS DE IR A PAGINA INICIAL SEMPRE ANTES DE SUBMETER UM PEDIDO !!!!
+                                    "due_date": result.due_date,
+                                    "who" : result.who,
+                                    "what_task": result.what_task,
+                                    "done" : 1
+                                })
+                                        .then(resp => {
+                                            location.reload()
+                                            /*
+                                            res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
+                                            res.write(templates.mainPage(d))//'<p>Update: ' + JSON.stringify(result) +'</p>')
+                                            res.end()
+                                            */
+                                        }).catch(error => {
+                                            console.log('Erro: ' + error);
+                                        })
+                                        
+                            }
+                            else{
+                                res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
+                                res.write("<p>Unable to collect data from body...</p>")
+                                res.end()
+                            }
+                        });
+                    }
 
                     else{
                         res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})

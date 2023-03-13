@@ -80,11 +80,20 @@ exports.mainPage = function(d,users,tasks){
     <div class="w3-cell-row" style="width:100%">
         <div class="w3-container  w3-cell">
         <ul>
+
+        <script>
+        function changeDone(id,task[i]){
+
+            
+        }
+        </script>
+
     `
           // CSS 
     for(let i = 0; i<tasks.length;i++){
         if(tasks[i].done == 0){
-                pagHTML += `<li>${tasks[i].what_task} - ${tasks[i].due_date} - ${tasks[i].who}  <-> <a href = "tasks/edit/${tasks[i].id}">[EDIT]</a> <-> <a href="/" onClick="tasks[i].done = 1"> [DONE]</a> </li>`
+                pagHTML += `<li>${tasks[i].what_task} - ${tasks[i].due_date} - ${tasks[i].who}  <-> <a href = "tasks/edit/${tasks[i].id}">[EDIT]</a> <-> 
+                <a href="/"> <form class="w3-container" action="/done/${tasks[i].id}" method="POST"> <button type=submit>[DONE]</button></a> </form></li>`
                 // falta adicionar aqui butao de done e edit !!! 
                 // Botao de edit e done vaao ser um put (da para modificar)
                 // diferenca e que o done e automatico
@@ -172,7 +181,7 @@ exports.editPageTasks = function(a, d){
                     <h2>Edit Task ${a.id}!</h2>
                 </header>
             
-                <form class="w3-container" method="POST">
+                <form class="w3-container" method="POST"> <!--TEM DE SER POST PORQUE HTML NAO RECONHECE PUT-->
                     <fieldset>
                     <legend>Metadata</legend>
                     <label>Id</label>
