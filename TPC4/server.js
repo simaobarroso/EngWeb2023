@@ -43,7 +43,7 @@ var tpc4server = http.createServer(function (req, res) {
                     console.log(taskId)
                  axios.get("http://localhost:3000/tasks/"+ taskId )
                     .then(response =>{
-                    aux = response.data
+                    let aux = response.data
                     axios.put("http://localhost:3000/tasks/"+ taskId, { 
                             "id" : aux.id,
                             "due_date": aux.due_date,
@@ -141,55 +141,14 @@ var tpc4server = http.createServer(function (req, res) {
                         res.end()
                     })
                     
-                }
-                /*
-                // GET /alunos/registo --------------------------------------------------------------------
-                else if(req.url == "/alunos/registo"){
-                    // Add code to render page with the student form
-                    res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                    res.write(templates.studentFormPage(d))
-                    res.end()
-                }
-                // GET /alunos/edit/:id --------------------------------------------------------------------
-                else if(/\/alunos\/edit\/(A|PG)[0-9]+$/i.test(req.url)){ // i significa ignore case
-                    // Get aluno record
-                    var idAluno = req.url.split("/")[3]
-                    axios.get("http://localhost:3000/alunos/" + idAluno)
-                    .then(response =>{
-                        let a = response.data
-                        res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                        res.write(templates.studentFormEditPage(a,d))
-                        res.end()
-                    })
-                    .catch(function(erro){
-                        res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                        res.write(`<p> Nao foi possivel obter o resgisto do aluno ${idAluno}... Erro: ` + erro)
-                        res.end()
-                    })
-                    
-                }
-                else if(/\/alunos\/delete\/(A|PG)[0-9]+$/i.test(req.url)){ // i significa ignore case
-                    // Get aluno record
-                    var idAluno = req.url.split("/")[3]
-                    axios.delete('http://localhost:3000/alunos/' +  idAluno)
-                        .then(resp => {
-                            res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                            res.write(`<p> Apagou o aluno ${idAluno}`)
-                            res.end()
-                        }).catch(error => {
-                                console.log('Erro: ' + error);
-                            })
-                }  */    
+                } 
                 else{
                     res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
                     res.write("<p>" + req.method + " " + req.url + " unsupported on this server.</p>")
                     res.end()
                 }
                 break
-                
 
-                /* Regex para ir buscar cada individual task e apresentar la???
-               */
                 case "POST":
                     if(req.url == '/register/user'){
                         collectRequestBodyData(req, result => {
