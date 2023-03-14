@@ -180,21 +180,26 @@ var tpc4server = http.createServer(function (req, res) {
                     }
                     
                     else if(req.url == '/'){
+                    axios.get("http://localhost:3000/tasks/")
+                    .then(response =>{
+                        let aux = 0
+                        for (let i = 0;i<response.data.length;i++){
+                            if (response.data[i].id > aux){
+                                aux = response.data[i].id
+                            }
+                        }
+                    
+                    console.log(aux)
                         collectRequestBodyData(req, result => {
                             if(result){
                                 axios.post('http://localhost:3000/tasks/', { // put vs post
-                                    "id" : lenTasks+1, // PROBLEMA COM ISTO TEMOS DE IR A PAGINA INICIAL SEMPRE ANTES DE SUBMETER UM PEDIDO !!!!
+                                    "id" : aux+1, 
                                     "due_date": result.due_date,
                                     "who" : result.who,
                                     "what_task": result.what_task,
                                     "done" : 0
                                 })
                                         .then(resp => {
-                                            /*
-                                            res.writeHead(201, {'Content-Type': 'text/html;charset=utf-8'})
-                                            res.write(templates.sucessPage(d))//'<p>Update: ' + JSON.stringify(result) +'</p>')
-                                            res.end()
-                                            */
                                             res.writeHead(301, {Location: 'http://localhost:7777/'});
                                             res.end();
                       
@@ -212,19 +217,9 @@ var tpc4server = http.createServer(function (req, res) {
                                 res.write("<p>Unable to collect data from body...</p>")
                                 res.end()
                             }
-                        });
-                    }
-                    /*
-                    else{
-                        res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
-                        res.write('<p>Unsupported POST request: ' + req.url + '</p>')
-                        res.write('<p><a href="/">Return</a></p>')
-                        res.end()
-                    }
-                   // break
-                */
-                //case "PUT": // REVER HTML PUT
-                    // PARA O CASO DO BOTAO EDIT E DONE    + edit     
+                        })
+                    })
+                }  
                 else if(/\/tasks\/edit\/[0-9]+$/.test(req.url)){
                     var taskId = req.url.split("/")[3]
                         collectRequestBodyData(req, result => {
