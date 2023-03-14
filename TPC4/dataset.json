@@ -12,16 +12,16 @@
   "tasks": [
     {
       "id": 1,
-      "due_date": "0156-05-06",
+      "due_date": "2023-05-28",
       "who": "Simao Barroso",
-      "what_task": "vghcfch",
+      "what_task": "Tirar 20 a EW",
       "done": 0
     },
     {
       "id": 2,
-      "due_date": "0656-12-06",
-      "who": "Simao Barroso",
-      "what_task": "46545665654",
+      "due_date": "2023-03-14",
+      "who": "jcr",
+      "what_task": "Aula T3 EW",
       "done": 1
     }
   ]
