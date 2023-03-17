@@ -31,5 +31,43 @@ block content
         label Name
         input.w3-input.w3-round(type="text" name="name")
       button.w3-btn.w3-blue.w3-mb-2.w3-margin(type="submit") Register!
+  .w3-container.w3-cell.w3-border(style="width:50%")
+    h2 Tarefas por fazer:
+    table.w3-table-all
+      tr
+        th Descrição
+        th Reponsável
+        th Data Limite
+        th Butões
+      each t in tList
+        if t.done == 0
+          tr
+            td= t.what_task
+            td= t.who
+            td= t.due_date
+            td
+              button.w3-btn.w3-round.w3-indigo.w3-margin-right 
+                a(href="/task/edit/"+t.id) Edit
+              button.w3-btn.w3-round.w3-indigo.w3-margin-right  
+                a(href="/task/delete/"+t.id) Delete
+              button.w3-btn.w3-round.w3-indigo.w3-margin-right  
+                a(href="/task/done/"+t.id) Done
+    .w3-container.w3-cell.w3-border(style="width:15%")
+    h2 Tarefas feitas:
+    table.w3-table-all
+      tr
+        th Descrição
+        th Reponsável
+        th Data Limite
+        th Butões
+      each t in tList
+        if t.done == 1
+          tr
+            td= t.what_task 
+            td= t.who
+            td= t.due_date
+            td
+              button.w3-btn.w3-round.w3-indigo.w3-margin-right  
+                a(href="/task/delete/"+t.id) Delete
   footer.w3-container.w3-cyan
     h5 TPC 5 de EngWeb - Simão Barroso - #{d}
