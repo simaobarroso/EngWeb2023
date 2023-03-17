@@ -7,29 +7,39 @@
     {
       "id": "1",
       "name": "jcr"
+    },
+    {
+      "id": "2",
+      "name": "Joao Loureiro"
     }
-
   ],
   "tasks": [
     {
-      "id": 1,
+      "id": "1",
       "due_date": "2023-03-14",
       "who": "jcr",
       "what_task": "Aula T3 EW",
       "done": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "due_date": "2023-05-20",
       "who": "Simao Barroso",
       "what_task": "Tirar 20 a PL",
       "done": 0
     },
     {
-      "id": 5,
+      "id": "5",
       "due_date": "2222-12-05",
       "who": "Simao Barroso",
       "what_task": "Acabar tudo",
+      "done": 0
+    },
+    {
+      "id": "6",
+      "due_date": "0551-12-15",
+      "who": "Joao Loureiro",
+      "what_task": "nsakjdbs",
       "done": 0
     }
   ]

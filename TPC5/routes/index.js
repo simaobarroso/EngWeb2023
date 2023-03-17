@@ -10,9 +10,10 @@ router.get('/', function(req, res, next) {
     var auxT = 0
     for (let i = 0;i<tasks.length;i++){
       if (parseInt(tasks[i].id) > auxT){
-          auxT = parseInt(tasks[i].id) +1
+          auxT = parseInt(tasks[i].id)
       }
     }
+    auxT +=1
     Todo.usersList()
       .then(users =>{
         var auxU = 0
@@ -38,7 +39,7 @@ router.get('/', function(req, res, next) {
 router.post('/add/user', function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   Todo.addUser(req.body)
-    .then( user =>{ // posso retirar este user e o => e os {}
+    .then( user =>{ // posso retirar este user e o => e os {} ???
       res.redirect('/')
       }
     )

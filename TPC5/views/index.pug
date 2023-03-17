@@ -6,12 +6,12 @@ block content
   header.w3-container.w3-pale-blue
     h2 TO-DO app!
   .w3-container.w3-padding-16
-    form.w3-container(action="/add/todo" method='POST')
+    form.w3-container(action="/add/task" method='POST')
       fieldset
         legend Register To-do!
         label Id
-        input.w3-input.w3-round(type='text' readonly value= idT name='name')
-        // ver maneira de omitir isto ->
+        input.w3-input.w3-round(type='number' readonly value= idT name='id')
+        // ver maneira de omitir isto -> 
         label Due Date
         input.w3-input.w3-round(type='date' name='due_date')
         label Utilizador
@@ -21,15 +21,15 @@ block content
                 option.w3-center #{u.name}
         label Tarefa
         input.w3-input.w3-round(type="text" name="what_task") 
-        button.w3-btn.w3-pale-green.w3-mb-2.w3-margin(type="submit") Submit!
+      button.w3-btn.w3-pale-green.w3-mb-2.w3-margin(type="submit") Submit!
   .w3-container.w3-padding-16      
     form.w3-container(action="/add/user" method='POST')
       fieldset
         legend Register User!
         label Id
-        input.w3-input.w3-round(type='text' readonly value= idU name='name')
+        input.w3-input.w3-round(type="number" readonly value= idU name='id')
         label Name
         input.w3-input.w3-round(type="text" name="name")
-        button.w3-btn.w3-pale-green.w3-mb-2.w3-margin(type="submit") Register!
+      button.w3-btn.w3-pale-green.w3-mb-2.w3-margin(type="submit") Register!
   footer.w3-container.w3-teal
     h5 TPC 5 de EngWeb - Simão Barroso - #{d}

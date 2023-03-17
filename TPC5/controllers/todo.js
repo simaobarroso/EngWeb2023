@@ -31,7 +31,7 @@ module.exports.addUser = a => {
 }
 
 module.exports.addTask = a => {
-    return axios.post('http://localhost:3000/tasks/', a)
+    return axios.post('http://localhost:3000/tasks/', { ...a, ...{'done':0} })
             .then(resposta => {
                 return resposta.data
             })
