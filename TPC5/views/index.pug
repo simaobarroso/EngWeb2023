@@ -3,7 +3,7 @@ extends layout
 block content
   //h1= title
   .w3-card-4
-  header.w3-container.w3-pale-blue
+  header.w3-container.w3-cyan 
     h2 TO-DO app!
   .w3-container.w3-padding-16
     form.w3-container(action="/add/task" method='POST')
@@ -21,7 +21,7 @@ block content
                 option.w3-center #{u.name}
         label Tarefa
         input.w3-input.w3-round(type="text" name="what_task") 
-      button.w3-btn.w3-pale-green.w3-mb-2.w3-margin(type="submit") Submit!
+      button.w3-btn.w3-blue.w3-mb-2.w3-margin(type="submit") Submit!
   .w3-container.w3-padding-16      
     form.w3-container(action="/add/user" method='POST')
       fieldset
@@ -30,6 +30,6 @@ block content
         input.w3-input.w3-round(type="number" readonly value= idU name='id')
         label Name
         input.w3-input.w3-round(type="text" name="name")
-      button.w3-btn.w3-pale-green.w3-mb-2.w3-margin(type="submit") Register!
-  footer.w3-container.w3-teal
+      button.w3-btn.w3-blue.w3-mb-2.w3-margin(type="submit") Register!
+  footer.w3-container.w3-cyan
     h5 TPC 5 de EngWeb - Simão Barroso - #{d}
