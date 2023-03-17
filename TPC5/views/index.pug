@@ -38,7 +38,7 @@ block content
         th Descrição
         th Reponsável
         th Data Limite
-        th Butões
+        th Botões
       each t in tList
         if t.done == 0
           tr
@@ -46,20 +46,20 @@ block content
             td= t.who
             td= t.due_date
             td
-              button.w3-btn.w3-round.w3-indigo.w3-margin-right 
+              button.w3-btn.w3-round.w3-indigo.w3-margin-left
                 a(href="/task/edit/"+t.id) Edit
-              button.w3-btn.w3-round.w3-indigo.w3-margin-right  
+              button.w3-btn.w3-round.w3-indigo.w3-margin
                 a(href="/task/delete/"+t.id) Delete
-              button.w3-btn.w3-round.w3-indigo.w3-margin-right  
+              button.w3-btn.w3-round.w3-indigo.w3-margin
                 a(href="/task/done/"+t.id) Done
-    .w3-container.w3-cell.w3-border(style="width:15%")
+  .w3-container.w3-cell.w3-border(style="width:50%")
     h2 Tarefas feitas:
     table.w3-table-all
       tr
         th Descrição
         th Reponsável
         th Data Limite
-        th Butões
+        th Botões
       each t in tList
         if t.done == 1
           tr
@@ -67,7 +67,7 @@ block content
             td= t.who
             td= t.due_date
             td
-              button.w3-btn.w3-round.w3-indigo.w3-margin-right  
+              button.w3-btn.w3-round.w3-indigo.w3-margin  
                 a(href="/task/delete/"+t.id) Delete
   footer.w3-container.w3-cyan
     h5 TPC 5 de EngWeb - Simão Barroso - #{d}
