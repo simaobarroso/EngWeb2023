@@ -1,3 +1,26 @@
 extends layout
 
 block content
+    .w3-card-4
+    header.w3-container.w3-cyan 
+        h2= 'Tarefa ' + t.id
+    .w3-container.w3-padding-16
+        form.w3-container(action="/edit/task" method='POST')
+            fieldset
+                legend Register To-do!
+                label Id
+                input.w3-input.w3-round(type='number' readonly value= t.id name='id')
+                label Due Date
+                input.w3-input.w3-round(type='date' value= t.due_date name='due_date')
+                label Utilizador
+                select.w3-select.w3-round(name='who')
+                    option(value='' disabled='' select='') 
+                    each u in uList
+                        option.w3-center #{u.name}
+                label Tarefa
+                input.w3-input.w3-round(type="text" value= t.what_task name="what_task") 
+                label= "Feito?" + " (1 sim, 0 não)"
+                input.w3-input.w3-round(type='number' value= t.done name='done')
+            button.w3-btn.w3-blue.w3-mb-2.w3-margin(type="submit") Mudar!
+    footer.w3-container.w3-cyan
+        h5 TPC 5 de EngWeb - Simão Barroso - #{d}

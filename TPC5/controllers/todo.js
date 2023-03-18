@@ -68,3 +68,26 @@ module.exports.doneTask = id => {
                     return erro
                 })
 }
+
+module.exports.getTask = id => {
+    return axios.get('http://localhost:3000/tasks/' + id)
+            .then(resposta => {
+                //console.log(resposta.data)
+                return resposta.data
+            })
+            .catch(erro => {
+                return erro
+            })
+}
+
+
+module.exports.updateTask = task => {
+    return axios.put('http://localhost:3000/tasks/' + task.id,task)
+            .then(resposta => {
+                //console.log(resposta.data)
+                return resposta.data
+            })
+            .catch(erro => {
+                return erro
+            })
+}

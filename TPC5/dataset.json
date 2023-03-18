@@ -15,25 +15,16 @@
   ],
   "tasks": [
     {
-      "id": "1",
-      "due_date": "2023-03-14",
-      "who": "jcr",
-      "what_task": "Aula T3 EW",
-      "done": 1
+      "id": "7",
+      "due_date": "1111-11-11",
+      "who": "Simao Barroso",
+      "what_task": "as"
     },
     {
-      "id": "2",
-      "due_date": "2023-05-20",
-      "who": "Simao Barroso",
-      "what_task": "Tirar 20 a PL",
-      "done": 0
-    },
-    {
-      "id": "5",
-      "due_date": "2222-12-05",
-      "who": "Simao Barroso",
-      "what_task": "Acabar tudo",
-      "done": 1
+      "id": "8",
+      "due_date": "0003-02-23",
+      "who": "Joao Loureiro",
+      "what_task": "assaa"
     }
   ]
 }

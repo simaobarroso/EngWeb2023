@@ -58,8 +58,38 @@ router.get('/task/done/:id', function(req, res, next) {
     })
 });
 
+router.get('/task/edit/:id', function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  //console.log(req.params.id)
+  Todo.getTask(req.params.id)
+    .then( t =>{
+      Todo.usersList()
+      .then(users =>{
+        tt = 'Task ' + t.id
+        res.render('editTask', { title: tt , t : t,uList : users, d : data})
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção da lista Utilizadores"})
+    })
+        
+      }
+    )
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro no get da task"})
+    })
+});
 
 
+
+router.post('/edit/task', function(req, res, next) {
+  Todo.updateTask(req.body)
+    .then(
+      res.redirect('/')
+    )
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na alteração da task"})
+    })
+});
 
 
 /* Post User */
