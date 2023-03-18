@@ -39,3 +39,14 @@ module.exports.addTask = a => {
                 return erro
             })
 }
+//deleteTask
+
+module.exports.deleteTask = id => {
+    return axios.delete('http://localhost:3000/tasks/' + id)
+            .then(
+                console.log('http://localhost:3000/tasks/' + id)
+            )
+            .catch(erro => {
+                return erro
+            })
+}

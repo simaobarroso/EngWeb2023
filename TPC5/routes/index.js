@@ -33,6 +33,20 @@ router.get('/', function(req, res, next) {
   })
 });
 
+/* Get delete/task/:id*/
+router.get('/task/delete/:id', function(req, res, next) {
+  // fazer uma confirm page????
+  Todo.deleteTask(req.params.id)
+    .then(
+      res.redirect('/')
+    )
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro a eliminar uma task"})
+    })
+});
+
+
+
 
 
 /* Post User */

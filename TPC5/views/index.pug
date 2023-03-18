@@ -46,9 +46,9 @@ block content
             td= t.who
             td= t.due_date
             td
-              button.w3-btn.w3-round.w3-indigo.w3-margin-left
-                a(href="/task/edit/"+t.id) Edit
               button.w3-btn.w3-round.w3-indigo.w3-margin
+                a(href="/task/edit/"+t.id) Edit
+              button.w3-btn.w3-round.w3-indigo
                 a(href="/task/delete/"+t.id) Delete
               button.w3-btn.w3-round.w3-indigo.w3-margin
                 a(href="/task/done/"+t.id) Done
