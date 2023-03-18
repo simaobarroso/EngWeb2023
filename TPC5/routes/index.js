@@ -45,6 +45,19 @@ router.get('/task/delete/:id', function(req, res, next) {
     })
 });
 
+/* Get /task/done/:id*/
+router.get('/task/done/:id', function(req, res, next) {
+  // fazer uma confirm page????
+  console.log(req.params.id)
+  Todo.doneTask(req.params.id)
+    .then(
+      res.redirect('/')
+    )
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro a colocar uma task como done"})
+    })
+});
+
 
 
 
