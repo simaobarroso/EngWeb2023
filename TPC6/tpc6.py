@@ -9,7 +9,11 @@ import requests
 api = "http://localhost:3000/pessoas/" # tal como o json server (nome colecao)
 
 f = open("./datasets/datasetAlterado.json") # ou datasets/datasetAlterado.json
+
+# returna o JSON object como um dicionario
 dataset = json.load(f)
+
+f.close()
 
 for data in dataset['pessoas']:
     id = data["_id"]
@@ -23,6 +27,7 @@ for data in dataset['pessoas']:
     else : # o id esta na base de dados e vamos ter de ter um put para o atualizar
         put = requests.put(api + id, json=data)
         print(put.text) # imprime o codigo da resposta
+
 
 """
 Notas de resolucao:

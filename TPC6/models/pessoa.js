@@ -95,9 +95,6 @@ var pessoaSchema = new mongoose.Schema({
 
 ----------------------------------------
 
-
-// Versao antiga -> nao punha partido nem morada nem atributos
-
 var pessoaSchema= new mongoose.Schema({
         _id:String,
         nome:String,
@@ -110,6 +107,7 @@ var pessoaSchema= new mongoose.Schema({
         },
         BI: String,
         profissao: String,
+        descrição : String,
         partido_politico: {
          party_abbr: String,
          party_name: String
@@ -133,8 +131,5 @@ var pessoaSchema= new mongoose.Schema({
          comida_favorita: String
         }
 })
-
-
-
 
 */
