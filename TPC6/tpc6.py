@@ -18,11 +18,11 @@ for data in dataset['pessoas']:
     #data["morada"]["_id"] = id
     getId = requests.get(api + id) 
     if getId.text == "null": # entra neste caso se o id do nao esteja na base de dados
-        post = requests.post(api, data)
+        post = requests.post(api,json=data) # para especificar se e` json (se nao nao sabia se era xml,json, plain txr, etc) ***
         print(post.text) # codigo do post (201 se sucesso)
     else : # o id esta na base de dados e vamos ter de ter um put para o atualizar
-        put = requests.put(api + id, data)
-        print(put) # imprime o codigo da resposta
+        put = requests.put(api + id, json=data)
+        print(put.text) # imprime o codigo da resposta
 
 """
 Notas de resolucao:
@@ -41,6 +41,16 @@ Notas de resolucao:
         Tambem foi feito em js, mas nao com a mesma complexidade.
 """
 
+
+"""
+*** 
+The data being sent is a dictionary object with nested data, which is represented as a JSON object.
+ 
+By passing this dictionary object to the json parameter of the requests.post() method, the requests library automatically 
+sets the Content-Type header to application/json and encodes the data as a JSON object before sending it in the request body.
+
+
+"""
 
 
 

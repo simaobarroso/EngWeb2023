@@ -1,32 +1,5 @@
 var mongoose = require ('mongoose')
-/*
-var pessoaSchema = new mongoose.Schema({
-        nome: String,
-        idade: Number,
-        morada: {
-            type: Map,
-            of: String
-        },
-        BI: String,
-        CC: String,
-        profissao: String,
-        partido_politico: {
-            type: Map,
-            of: String
-        },
-        religiao: String,
-        desportos: [String],
-        animais: [String],
-        figura_publica_pt: [String],
-        marca_carro: String,
-        destinos_favoritos: [String],
-        atributos: {
-            type: Map,
-            of: String
-        },
-        _id: String
-});
-*/
+
 
 const moradaSchema = new mongoose.Schema({
         cidade: String,
@@ -37,7 +10,7 @@ const moradaSchema = new mongoose.Schema({
 const partido_politicoSchema = new mongoose.Schema({
         party_abbr: String,
         party_name: String,
-        _id: String
+        _id: String // se puser assim nao cria ele id (rever !!!!)
 });
 
 const atributosSchema = new mongoose.Schema({
@@ -84,8 +57,47 @@ var pessoaSchema = new mongoose.Schema({
 });
 
 
+module.exports = mongoose.model('pessoa',pessoaSchema)
+
+
+/*
+Outras maneiras de fazer o schmea
+
+1-------------------------
+
+
+var pessoaSchema = new mongoose.Schema({
+        nome: String,
+        idade: Number,
+        morada: {
+            type: Map,
+            of: String
+        },
+        BI: String,
+        CC: String,
+        profissao: String,
+        partido_politico: {
+            type: Map,
+            of: String
+        },
+        religiao: String,
+        desportos: [String],
+        animais: [String],
+        figura_publica_pt: [String],
+        marca_carro: String,
+        destinos_favoritos: [String],
+        atributos: {
+            type: Map,
+            of: String
+        },
+        _id: String
+});
+
+----------------------------------------
+
+
 // Versao antiga -> nao punha partido nem morada nem atributos
-/* 
+
 var pessoaSchema= new mongoose.Schema({
         _id:String,
         nome:String,
@@ -121,7 +133,8 @@ var pessoaSchema= new mongoose.Schema({
          comida_favorita: String
         }
 })
+
+
+
+
 */
-
-
-module.exports = mongoose.model('pessoa',pessoaSchema)
