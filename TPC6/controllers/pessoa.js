@@ -3,7 +3,7 @@ var Pessoa = require("../models/pessoa")
 module.exports.list = () => {
     return Pessoa
     .find()
-    .sort({nome:-1})
+    .sort({nome:1})
     .then(dados=>{
         return dados
     })

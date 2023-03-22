@@ -1,0 +1,50 @@
+# TPC6 - carregar dataset json no mongo db
+# simaobarroso
+
+import json
+import time
+import requests
+
+# link da api da aplicacao de dados
+api = "http://localhost:3000/pessoas/" # tal como o json server (nome colecao)
+
+f = open("./datasets/datasetAlterado.json") # ou datasets/datasetAlterado.json
+dataset = json.load(f)
+
+for data in dataset['pessoas']:
+    id = data["_id"]
+    getId = requests.get(api + id) 
+    if getId.text == "null": # entra neste caso se o id do nao esteja na base de dados
+        post = requests.post(api, data)
+        print(post) # codigo do post (201 se sucesso)
+    else : # o id esta na base de dados e vamos ter de ter um put para o atualizar
+        put = requests.put(api + id, data)
+        print(put) # imprime o codigo da resposta
+
+"""
+Notas de resolucao:
+    Primeiro criou-se com um servidor express. Eliminou-se as views e partes desnecessarioas, uma vez que esta api era apenas para ser
+    uma api.
+    De seguida utilizei o Postman para testar as varias operacoes (o get ainda conseguia no browser, as restantes teve de ser no postman)
+    Por ultimo foi fazer este ficheiro.
+        Percorro todo o dataset dado e a cada elemento vejo se ele esta na bd Mongo com um get. Se nao estiver adiciono com post, caso contrario atualizo com put.
+        Do CRUD a unica que falta e` delete. mas facilmente era feita:
+            requests.delete(api + id)
+            Mas como o exercicio nao pede, nao utilizei. Mas experimentei com o postman e funcionou, logo essa funcionalidade da api esta implementada.
+        NO entanto esta constante verificacao leva a uma lentidao do programa, mas tambem a sua correcao.
+        Optei por fazer em python uma vez que assim aprendia uma nova maneira de mandar pedidos, uma vez que em javascript ja fizemos varias vezes com o axios.
+"""
+
+
+
+
+"""
+pip install requests
+
+
+tpc6.py     <--->    node server express (npm start) <=> API dados    <--> MongoDB
+
+notas :
+servidor express tem de estar a funcionar
+
+"""
