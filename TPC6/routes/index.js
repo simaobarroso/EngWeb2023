@@ -24,6 +24,7 @@ router.get('/pessoas/:id', function(req, res, next) {
 
 // temos que testar com o postman (ou curl)
 router.post('/pessoas',(req,res) => {
+  console.log(req.body)
   Pessoa.addPessoa(req.body)
     .then(dados => res.status(201).json(dados))
     .catch(erro => res.status(603).json({erro:erro}))

@@ -1,7 +1,60 @@
 var mongoose = require ('mongoose')
 
+const moradaSchema = new mongoose.Schema({
+        cidade: String,
+        distrito: String
+});
+
+const partido_politicoSchema = new mongoose.Schema({
+        party_abbr: String,
+        party_name: String
+});
+
+const atributosSchema = new mongoose.Schema({
+        fumador: Boolean,
+        gosta_cinema: Boolean,
+        gosta_viajar: Boolean,
+        acorda_cedo: Boolean,
+        gosta_ler: Boolean,
+        gosta_musica: Boolean,
+        gosta_comer: Boolean,
+        gosta_animais_estimacao: Boolean,
+        gosta_dancar: Boolean,
+        comida_favorita: String
+});
 
 
+var pessoaSchema = new mongoose.Schema({
+        nome: String,
+        idade: Number,
+        morada: {
+            type: moradaSchema,
+            required: false 
+        },
+        BI: String,
+        CC: String,
+        descrição : String,
+        profissao: String,
+        partido_politico: {
+                type: partido_politicoSchema,
+                required: false
+        },
+        religiao: String,
+        desportos: [String],
+        animais: [String],
+        figura_publica_pt: [String],
+        marca_carro: String,
+        destinos_favoritos: [String],
+        atributos: {
+                type: atributosSchema,
+                required: false
+        },
+        _id: String
+});
+
+
+// Versao antiga -> nao punha partido nem morada nem atributos
+/* 
 var pessoaSchema= new mongoose.Schema({
         _id:String,
         nome:String,
@@ -37,6 +90,7 @@ var pessoaSchema= new mongoose.Schema({
          comida_favorita: String
         }
 })
+*/
 
 
 module.exports = mongoose.model('pessoa',pessoaSchema)

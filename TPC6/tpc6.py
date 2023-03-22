@@ -16,7 +16,7 @@ for data in dataset['pessoas']:
     getId = requests.get(api + id) 
     if getId.text == "null": # entra neste caso se o id do nao esteja na base de dados
         post = requests.post(api, data)
-        print(post) # codigo do post (201 se sucesso)
+        print(post.text) # codigo do post (201 se sucesso)
     else : # o id esta na base de dados e vamos ter de ter um put para o atualizar
         put = requests.put(api + id, data)
         print(put) # imprime o codigo da resposta
