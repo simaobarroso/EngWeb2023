@@ -31,8 +31,11 @@ Notas de resolucao:
         Do CRUD a unica que falta e` delete. mas facilmente era feita:
             requests.delete(api + id)
             Mas como o exercicio nao pede, nao utilizei. Mas experimentei com o postman e funcionou, logo essa funcionalidade da api esta implementada.
+            Como vou testar constantemente, decidi tambem fazer uma funcao delete. 
+            Logo todas as funcionalidades funcionam
         NO entanto esta constante verificacao leva a uma lentidao do programa, mas tambem a sua correcao.
         Optei por fazer em python uma vez que assim aprendia uma nova maneira de mandar pedidos, uma vez que em javascript ja fizemos varias vezes com o axios.
+        Tambem foi feito em js, mas nao com a mesma complexidade.
 """
 
 

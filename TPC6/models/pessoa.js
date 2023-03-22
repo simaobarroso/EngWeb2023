@@ -1,6 +1,7 @@
 var mongoose = require ('mongoose')
 
 
+
 var pessoaSchema= new mongoose.Schema({
         _id:String,
         nome:String,
@@ -36,5 +37,6 @@ var pessoaSchema= new mongoose.Schema({
          comida_favorita: String
         }
 })
+
 
 module.exports = mongoose.model('pessoa',pessoaSchema)
