@@ -11,6 +11,6 @@ dataset = json.load(f)
 for data in dataset['pessoas']:
     id = data["_id"]
     getId = requests.get(api + id) 
-    if getId.text != "null": # entra neste caso se o id do nao esteja na base de dados
+    if getId.text != "null": # entra neste caso se o id  esteja na base de dados (ou seja, e` para eliminar)
         delete = requests.delete(api + id)
         print(delete) # imprime o codigo da resposta
