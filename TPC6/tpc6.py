@@ -13,6 +13,9 @@ dataset = json.load(f)
 
 for data in dataset['pessoas']:
     id = data["_id"]
+    #data["partido_politico"]["_id"] = id
+    #data["atributos"]["_id"] = id
+    #data["morada"]["_id"] = id
     getId = requests.get(api + id) 
     if getId.text == "null": # entra neste caso se o id do nao esteja na base de dados
         post = requests.post(api, data)
