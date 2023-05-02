@@ -25,4 +25,4 @@ var emdSchema = new mongoose.Schema({
         resultado: Boolean
 })
 
-module.exports = mongoose.model('emd',emdSchema)
+module.exports = mongoose.model('exames',emdSchema) // aqui e` o nome da collection
