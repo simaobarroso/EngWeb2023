@@ -1,0 +1,25 @@
+setup :
+mongoimport -d EMD -c exames --file emd.json --jsonArray
+    resultado: 300 document(s) imported successfully.
+
+
+Queries:
+
+1.
+db.exames.count() 
+db.exames.find().count()
+resposta : 300
+
+2. db.exames.find({resultado:true}).count()
+resposta : 138
+
+3. db.exames.find({género: {$regex: /^./}}).count()
+
+
+4. 
+
+5. db.exames.find({clube: "GDGoma"}).count()
+resposta : 24
+
+6. db.exames.find({género: "F", modalidade : "Triatlo"}).count()
+resposta : 9
