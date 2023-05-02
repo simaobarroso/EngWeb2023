@@ -2,6 +2,7 @@ setup :
 mongoimport -d EMD -c exames --file emd.json --jsonArray
     resultado: 300 document(s) imported successfully.
 
+nota: resulucoes com # antes nao sao validas (notas para minha analise futura)
 
 Queries:
 
@@ -13,13 +14,46 @@ resposta : 300
 2. db.exames.find({resultado:true}).count()
 resposta : 138
 
-3. db.exames.find({género: {$regex: /^./}}).count()
+3. # db.exames.find({groupBy : "$género"}).count()
+resposta: 142 "F"  -----  db.exames.find({"género":"F"}).count()
+          158 "M"  ----- db.exames.find({"género":"M"}).count()
+          0 outro  ----- 300 - 158 - 142 = 0
+
+db.exames.distinct("género").length
 
 
-4. 
+4. # db.exames.distinct("modalidade").length
+# resposta : 17
 
-5. db.exames.find({clube: "GDGoma"}).count()
-resposta : 24
+db.exames.aggregate([{$group : {_id: "$modalidade", count: {$sum:1}} }])
+[
+  { _id: 'Atletismo', count: 18 },
+  { _id: 'Karaté', count: 15 },
+  { _id: 'Badminton', count: 21 },
+  { _id: 'Basquetebol', count: 13 },
+  { _id: 'Equitação', count: 13 },
+  { _id: 'Futebol', count: 24 },
+  { _id: 'Parapente', count: 19 },
+  { _id: 'Orientação', count: 19 },
+  { _id: 'Dança', count: 17 },
+  { _id: 'Andebol', count: 18 },
+  { _id: 'Ciclismo', count: 18 },
+  { _id: 'BTT', count: 18 },
+  { _id: 'SUP', count: 16 },
+  { _id: 'Esgrima', count: 20 },
+  { _id: 'Triatlo', count: 23 },
+  { _id: 'Ténis', count: 10 },
+  { _id: 'Patinagem', count: 18 }
+]
+
+
+5. db.exames.find({"clube":"GDGoma","federado":true}).count()
+resposta : 12
+
+#db.exames.find({clube: "GDGoma"}).count()
 
 6. db.exames.find({género: "F", modalidade : "Triatlo"}).count()
 resposta : 9
+
+
+
