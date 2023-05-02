@@ -99,12 +99,6 @@ router.get('/api/emd', function(req, res, next) {
     .catch(erro => res.status(602).json({erro : erro}))
 });
 
-// API: 2
-router.get('/api/emd/:id', function(req, res, next) {
-  EMD.getEMD(req.params.id)
-    .then(dados => res.json(dados))
-    .catch(erro => res.status(602).json({erro : erro}))
-});
 
 // API: 3
 router.get('/api/modalidades', function(req, res, next) {
@@ -141,6 +135,13 @@ router.get('/api/emd?modalidade=:clube', function(req, res, next) {
     .catch(erro => res.status(602).json({erro : erro}))
 });
 
+
+// API: 2
+router.get('/api/emd/:id', function(req, res, next) {
+  EMD.getEMD(req.params.id)
+    .then(dados => res.json(dados))
+    .catch(erro => res.status(602).json({erro : erro}))
+});
 /*
 
 router.post('/EMDs', (req,res) => {
